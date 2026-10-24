@@ -50,7 +50,7 @@ style(logo): margen interior del cuadrado de 0,40 a 0,36 cap
 ## Antes de abrir un pull request
 
 ```bash
-npm run lint && npx tsc --noEmit && npm run build
+npm run check   # lint, build y chequeo de tipos (el build genera los tipos de rutas que usa tsc)
 ```
 
 Si el cambio es visual, adjuntar una captura en móvil y otra en escritorio.
