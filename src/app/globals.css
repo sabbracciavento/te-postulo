@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@theme {
+  --color-papel: #f4efe6;
+  --color-papel-2: #ebe4d6;
+  --color-tinta: #141414;
+  --color-tinta-2: #3a3a3a;
+  --color-naranja: #f0532d;
+  --color-naranja-2: #d8441f;
+  --color-verde: #1e4d3b;
+  --color-verde-2: #173d2f;
+  --color-azul: #1b3a6b;
+  --color-whatsapp: #25d366;
+
+  /* paleta propia del mail de resumen (se ve como un mail real, no como el sitio) */
+  --color-mail-bg: #eef1f6;
+  --color-mail-card: #ffffff;
+  --color-mail-head: #1f2a44;
+  --color-mail-ink: #1f2a44;
+  --color-mail-muted: #5b6475;
+  --color-mail-line: #e6e9f0;
+  --color-mail-tile: #f4f6fb;
+  --color-mail-accent: #b4541f;
+
+  --font-display: var(--font-archivo), "Archivo", "Arial Black", sans-serif;
+  --font-sans: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
+  --font-mail: var(--font-roboto), Roboto, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-gmail: "Google Sans", var(--font-roboto), Roboto, Arial, sans-serif;
+
+  --radius-tag: 4px;
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-spin-slow: spin 40s linear infinite;
+  --animate-fade: fade 220ms ease-out both;
+  --animate-rise: rise 480ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-papel);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    overflow-x: clip;
+  }
+  @media (min-width: 1024px) {
+    body { font-size: 18px; }
+  }
+  ::selection {
+    background: var(--color-naranja);
+    color: var(--color-papel);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-naranja);
+    outline-offset: 3px;
+  }
+  h1, h2, h3, .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+  summary { list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility wide {
+  font-stretch: 118%;
+}
+@utility narrow {
+  font-stretch: 80%;
+}
+@utility kicker {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+@utility container-site {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 80rem;
+  @media (min-width: 1024px) { padding-inline: 3rem; }
+}
+@utility safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@layer components {
+  /* subrayado dibujado a mano (naranja) */
+  .u-drawn {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 C 40 2, 80 11, 120 6 S 180 3, 198 7' fill='none' stroke='%23f0532d' stroke-width='4' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 0.42em;
+    background-position: 0 100%;
+    padding-bottom: 0.12em;
+  }
+
+  /* alternativa tachada con trazo naranja (comparativa móvil) */
+  .strike-drawn {
+    position: relative;
+    display: inline-block;
+  }
+  .strike-drawn::after {
+    content: "";
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    top: 52%;
+    height: 0.28em;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 7 C 50 2, 120 10, 198 5' fill='none' stroke='%23f0532d' stroke-width='3.5' stroke-linecap='round'/></svg>");
+    background-size: 100% 100%;
+    pointer-events: none;
+  }
+
+  /* línea trazada entre pasos (escritorio): mejora progresiva con scroll-timeline */
+  .trace-line path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .trace-line path {
+        stroke-dashoffset: 1;
+        animation: trace linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 55%;
+      }
+    }
+  }
+  @keyframes trace {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* carrusel con snap (móvil) */
+  .snap-row {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+  }
+  .snap-row > * {
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+  }
+}
+
+/* ---- Logo: un solo SVG (cuadrado "Te" + "Postulo" en trazados). Ancho por tamaño, alto por proporción ---- */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  width: var(--logo-w);
+  flex: none;
+  text-decoration: none;
+  line-height: 0;
+}
+@media (min-width: 1024px) {
+  .logo { width: var(--logo-w-lg); }
+}
+.logo-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.logo-tile { transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1); transform-box: fill-box; transform-origin: center; }
+.logo:hover .logo-tile,
+.logo:focus-visible .logo-tile { transform: translateY(-3%); }
+@media (prefers-reduced-motion: reduce) {
+  .logo-tile { transition: none; }
+}
