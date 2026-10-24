@@ -24,7 +24,7 @@ export const steps = {
 export const mailSection = {
   kicker: "La prueba",
   title: "Esto es lo que te llega",
-  lead: "Después de cada ronda, un resumen en tu casilla laboral. Si una empresa te escribe, te avisamos ese día.",
+  lead: "Un solo mail por día en tu casilla laboral, a la tarde. Si una empresa te escribe, te avisamos ese mismo día.",
   casilla: "La casilla es tuya: entrás cuando quieras, desde el celular o la compu. Tu mail personal queda afuera.",
   noHacemos: {
     kicker: "Lo que no hacemos",

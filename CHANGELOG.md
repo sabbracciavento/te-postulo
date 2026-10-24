@@ -6,6 +6,12 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 
 ## [Sin publicar]
 
+### Cambiado
+- La maqueta del mail replica el nuevo resumen diario del servicio: un solo mail por día, título con la cifra del día,
+  una frase con lo importante, bloque "Para vos" con lo que depende de la persona, tres cifras (hoy, total, empresas que se movieron),
+  postulaciones del día con el portal, movimientos de empresas y totales. Misma paleta y logo que el sitio.
+- Texto de la sección del mail: "un solo mail por día, a la tarde".
+
 ## [1.0.0] - 2026-10-23
 
 ### Agregado
