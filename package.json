@@ -1,0 +1,40 @@
+{
+  "name": "te-postulo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio público de Te Postulo: búsqueda laboral asistida en Buenos Aires. Next.js 16, Tailwind CSS v4, TypeScript.",
+  "homepage": "https://tepostulo.com.ar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sabbracciavento/te-postulo.git"
+  },
+  "author": "Santiago Abbracciavento",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "motion": "^14.6.0",
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
