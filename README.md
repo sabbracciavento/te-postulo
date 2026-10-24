@@ -87,7 +87,7 @@ Una sola página, pensada para leerse en el celular en dos minutos, más la pol�
 | **Hero** | La promesa en tres líneas y el botón de WhatsApp. En móvil, una barra de acción fija. |
 | **Barra de confianza** | Cuatro afirmaciones cortas en marquesina: sin usuario ni app, casilla propia, postulación diaria, hecho en Buenos Aires. |
 | **Cómo funciona** | Tres pasos: escribís, armamos tu perfil, postulamos y te contamos. |
-| **El mail** | Una maqueta fiel de Gmail (móvil y escritorio) con un resumen diario de ejemplo: cuántas postulaciones, a dónde, qué contestaron. Datos ficticios. |
+| **El mail** | Una maqueta fiel de Gmail (móvil y escritorio) con el resumen diario de ejemplo, igual al que manda el servicio. Datos ficticios. |
 | **Planes** | Base y Plus, con lo que incluye cada uno. |
 | **Confianza** | Qué hacemos y qué no hacemos con los datos de la persona. |
 | **Preguntas** | Las seis dudas que aparecen siempre en el primer mensaje. |
@@ -97,6 +97,24 @@ Una sola página, pensada para leerse en el celular en dos minutos, más la pol�
   <img src="docs/img/home-movil.png" alt="Home en móvil" width="260">
   &nbsp;&nbsp;&nbsp;
   <img src="docs/img/home-escritorio.png" alt="Home en escritorio" width="640">
+</p>
+
+### El mail diario, tal como llega
+
+Un solo mail por día, pensado para leerse en un minuto sin perder nada importante. La maqueta del sitio replica la
+estructura real:
+
+1. **Título con la cifra del día** y una frase con lo único que hay que saber.
+2. **"Para vos"**: lo que depende de la persona (una entrevista, un dato que piden, un aviso para postular desde su
+   LinkedIn), con botón por aviso. Solo aparece si hay algo.
+3. **Tres cifras**: postulaciones hoy, en total, empresas que se movieron.
+4. **Postulaciones del día** con el portal, **movimientos de empresas** (quién vio el CV, quién avanzó) y los totales
+   de la búsqueda.
+
+<p align="center">
+  <img src="docs/img/mail-movil.png" alt="El resumen diario visto en el celular" width="300">
+  &nbsp;&nbsp;&nbsp;
+  <img src="docs/img/mail-escritorio.png" alt="El resumen diario visto en Gmail de escritorio" width="640">
 </p>
 
 ## Stack y decisiones técnicas

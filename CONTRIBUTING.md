@@ -53,4 +53,5 @@ style(logo): margen interior del cuadrado de 0,40 a 0,36 cap
 npm run check   # lint, build y chequeo de tipos (el build genera los tipos de rutas que usa tsc)
 ```
 
-Si el cambio es visual, adjuntar una captura en móvil y otra en escritorio.
+Si el cambio es visual, adjuntar una captura en móvil y otra en escritorio, y regenerar las imágenes de `docs/img/`
+(portada, home y sección del mail) para que el README muestre el sitio tal como está.
