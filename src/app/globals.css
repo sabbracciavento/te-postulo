@@ -171,3 +171,12 @@
   }
 
 }
+
+/* Mail completo dentro de los dispositivos del hero (EmailSummary hero): piso de tamaño para lo chico, en px de diseño. Quien lo usa
+   fija --mail-min según la escala del dispositivo, para que nada quede por debajo de 11 px reales en el celular y 12 en escritorio. */
+.mail-hero .text-\[10px\] { font-size: max(10px, var(--mail-min, 0px)); }
+.mail-hero .text-\[11px\] { font-size: max(11px, var(--mail-min, 0px)); }
+.mail-hero .text-\[12px\] { font-size: max(12px, var(--mail-min, 0px)); }
+.mail-hero .text-\[13px\] { font-size: max(13px, var(--mail-min, 0px)); }
+.mail-hero .text-\[14px\] { font-size: max(14px, var(--mail-min, 0px)); }
+.mail-hero .text-\[15px\] { font-size: max(15px, var(--mail-min, 0px)); }

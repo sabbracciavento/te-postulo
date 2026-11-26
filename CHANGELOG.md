@@ -6,10 +6,20 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 
 ## [Sin publicar]
 
+### Agregado
+- Hero animado con los tres tipos de mail (un día normal, una entrevista y cuando necesitamos algo de la persona), en el celular y en
+  tablet/escritorio. Cada mail es una secuencia corta: entra la notificación al celular, se abre el mail y la compu y el celular lo
+  recorren entero, bloque por bloque y sincronizados (el celular un bloque adelante), con pausas; al final, fundido cruzado al siguiente.
+  Es el mail completo, el mismo componente de la sección del mail.
+- Pastillas con barra de progreso para elegir el mail. La animación corre solo con el hero a la vista y se pausa con el puntero encima,
+  con el foco de teclado y con la pestaña oculta; con `prefers-reduced-motion` no hay animación (el mail queda abierto en su bloque
+  principal) y se cambia con las pastillas. Sin regiones `aria-live`; los dispositivos siguen siendo decorativos.
+
 ### Cambiado
-- Hero en el celular (menos de 768 px): la compu y el celular en una composición propia, entera y legible (ventana de Gmail atrás y
-  celular entero adelante, con el mismo mail: logo, título y cifra del día), en lugar del teléfono grande cortado. Escala de 320 a 767 px.
-  Tablet y escritorio sin cambios (comparación píxel a píxel: 0 diferencias).
+- Hero en el celular (menos de 768 px): la compu y el celular en una composición propia, entera y legible, en lugar del teléfono grande
+  cortado. Texto de al menos 11 px a 390 px de ancho (12 px en tablet y escritorio).
+- Hero en tablet y escritorio: el mail a tamaño de lectura, sin fundidos sobre el texto y sin nada debajo del celular.
+- Animación hecha solo con `transform` y `opacity` (requestAnimationFrame, desplazamientos en píxeles enteros): 60 cuadros por segundo.
 
 ## [2.0.0] - 2026-11-26
 

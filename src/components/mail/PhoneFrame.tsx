@@ -13,10 +13,14 @@ type Props = {
   hora?: string;
   /** alto fijo de la pantalla en px (teléfono entero en proporción real): el contenido se corta adentro, con fundido */
   pantalla?: number;
+  /** false: sin la barra de estado del marco (el contenido trae la suya, a otra escala) */
+  barra?: boolean;
+  /** false: sin el fundido a blanco de abajo de la pantalla fija (el contenido no llega hasta el borde) */
+  fundido?: boolean;
 };
 
 /** Teléfono Android genérico dibujado en CSS. Sin marcas. */
-export function PhoneFrame({ children, notification, className = "", cropped = false, hora = "18:02", pantalla }: Props) {
+export function PhoneFrame({ children, notification, className = "", cropped = false, hora = "18:02", pantalla, barra = true, fundido = true }: Props) {
   return (
     <div
       className={`relative mx-auto w-full max-w-[380px] rounded-[2.4rem] border-[10px] border-ink bg-ink ${
@@ -30,6 +34,7 @@ export function PhoneFrame({ children, notification, className = "", cropped = f
         style={pantalla ? { height: pantalla } : undefined}
       >
         {/* barra de estado Android simplificada */}
+        {barra && (
         <div className="flex items-center justify-between bg-white px-5 pb-0.5 pt-2.5 font-gmail text-[12px] font-medium text-[#1f1f1f]">
           <span>{hora}</span>
           <span className="flex items-center gap-1.5" aria-hidden="true">
@@ -44,6 +49,7 @@ export function PhoneFrame({ children, notification, className = "", cropped = f
             </i>
           </span>
         </div>
+        )}
 
         {notification && (
           <div className="mx-3 mt-1.5 rounded-[20px] bg-[#f2f3f8] px-4 py-3 font-gmail">
@@ -60,7 +66,7 @@ export function PhoneFrame({ children, notification, className = "", cropped = f
 
         <div className={notification ? "mt-2" : ""}>{children}</div>
         {/* pantalla de alto fijo: el mail sigue hacia abajo; un fundido a blanco lo indica sin cortar en seco */}
-        {pantalla && <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-white/0 to-white" />}
+        {pantalla && fundido && <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-white/0 to-white" />}
       </div>
     </div>
   );

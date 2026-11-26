@@ -34,8 +34,9 @@ const estadoColor: Record<MailEstado, string> = {
 };
 
 /** Banda del cuerpo, de borde a borde; las secciones se separan con un filete, no con tarjetas. */
-function Fila({ children, className = "", filete = true }: { children: React.ReactNode; className?: string; filete?: boolean }) {
-  return <div className={`px-6 py-11 @min-[680px]:px-12 ${filete ? "border-t border-line" : ""} ${className}`}>{children}</div>;
+/** `bloque`: marca para el recorrido animado del hero (data-bloque); no cambia nada a la vista. */
+function Fila({ children, className = "", filete = true, bloque }: { children: React.ReactNode; className?: string; filete?: boolean; bloque?: string }) {
+  return <div data-bloque={bloque} className={`px-6 py-11 @min-[680px]:px-12 ${filete ? "border-t border-line" : ""} ${className}`}>{children}</div>;
 }
 
 function Rotulo({ children, n, color = "text-brand" }: { children: React.ReactNode; n?: number; color?: string }) {
@@ -55,7 +56,11 @@ function Boton({ children, invertido = false }: { children: React.ReactNode; inv
   );
 }
 
-export function EmailSummary({ scenario: s, compact = false }: { scenario: MailScenario; compact?: boolean }) {
+/**
+ * hero: el mail completo dentro de los dispositivos del hero, a escala. Agrega la clase `mail-hero` (piso de tamaño para lo chico,
+ * `--mail-min` en globals.css) y apila las tres cifras de "Tu búsqueda" (en una pantalla angosta no entran en tres columnas).
+ */
+export function EmailSummary({ scenario: s, compact = false, hero = false }: { scenario: MailScenario; compact?: boolean; hero?: boolean }) {
   const b = s.busqueda;
   const pendientes = s.tareas.length + s.avisos.length;
   // sin postulaciones, la cifra es lo revisado (un "0" gigante solo repetiría el título)
@@ -64,19 +69,20 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
     : [s.revisados, palabra(s.revisados, "aviso revisado hoy.", "avisos revisados hoy."), "Ninguno encajaba con lo que buscás."];
 
   return (
-    <div className="@container bg-cloud pb-10 text-ink @min-[680px]:px-3 @min-[680px]:pt-8" style={{ fontFamily: FONT }}>
+    <div className={`@container bg-cloud pb-10 text-ink @min-[680px]:px-3 @min-[680px]:pt-8 ${hero ? "mail-hero" : ""}`} style={{ fontFamily: FONT }}>
       <div className="overflow-hidden border-y border-line bg-white @min-[680px]:mx-auto @min-[680px]:max-w-[640px] @min-[680px]:rounded-[16px] @min-[680px]:border-x">
         {/* cabecera blanca: monograma + nombre + fecha corta en versalitas */}
-        <div className="flex items-center gap-2.5 px-6 pb-7 pt-9 @min-[680px]:px-12">
+        <div data-bloque="cabecera" className="flex items-center gap-2.5 px-6 pb-7 pt-9 @min-[680px]:px-12">
           <Image src="/brand/mail/logo-tp-192.png" alt="" width={36} height={36} className="h-9 w-9" />
           <span className="flex-1 text-[20px] font-extrabold leading-9 tracking-[-0.5px]" style={{ fontFamily: FONT_LOGO }}>
             TePostulo
           </span>
-          <span className="whitespace-nowrap text-[12px] font-bold uppercase tracking-[1.4px] text-slate">{s.fechaCorta}</span>
+          {/* en el celular del hero (pantalla muy angosta) la fecha corta no entra: ya está en el saludo */}
+          <span className={`whitespace-nowrap text-[12px] font-bold uppercase tracking-[1.4px] text-slate ${hero ? "@max-[240px]:hidden" : ""}`}>{s.fechaCorta}</span>
         </div>
 
         {/* apertura: saludo, título y una frase */}
-        <Fila filete={false} className="pb-11! pt-4!">
+        <Fila filete={false} className="pb-11! pt-4!" bloque="apertura">
           <p className="m-0 mb-4 text-[15px] leading-[1.5] text-slate">
             Hola {mailPersona} · {s.fecha}
           </p>
@@ -88,7 +94,7 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
 
         {/* entrevista: tarjeta con degradé suave y aire alrededor (el cobalto plano de borde a borde se veía duro en Gmail) */}
         {s.entrevista && (
-          <div className="px-6 pb-12 @min-[680px]:px-12">
+          <div data-bloque="entrevista" className="px-6 pb-12 @min-[680px]:px-12">
             <div className="rounded-[20px] bg-[#1E40D8] bg-[linear-gradient(135deg,#3358F0_0%,#1E40D8_55%,#1530C8_100%)] px-6 py-7 text-white @min-[680px]:px-9 @min-[680px]:pb-[34px] @min-[680px]:pt-9">
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
@@ -120,7 +126,7 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
         )}
 
         {/* la cifra del día como pieza de evidencia */}
-        <Fila filete={!s.entrevista} className={s.entrevista ? "pt-0!" : ""}>
+        <Fila filete={!s.entrevista} className={s.entrevista ? "pt-0!" : ""} bloque="cifra">
           <div className="text-[76px] leading-[0.9] tracking-[-4px] text-brand @min-[680px]:text-[96px]" style={NUM}>
             {cifra}
           </div>
@@ -135,7 +141,7 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
           <>
             {/* lo que depende de la persona; con una entrevista destacada, eso ES lo que tiene que hacer */}
             {pendientes > 0 ? (
-              <Fila>
+              <Fila bloque="pendientes">
                 <Rotulo n={pendientes}>Para hacer hoy</Rotulo>
                 {s.tareas.map((t, i) => (
                   <div key={t.titulo} className={i ? "mt-[22px] border-t border-line pt-[22px]" : ""}>
@@ -177,7 +183,7 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
               </Fila>
             ) : (
               !s.entrevista && (
-                <Fila>
+                <Fila bloque="nada">
                   <p className="m-0 text-[20px] font-extrabold leading-[1.3] tracking-[-0.3px]" style={{ fontFamily: FONT_LOGO }}>
                     Hoy no tenés que hacer nada.
                   </p>
@@ -188,7 +194,7 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
 
             {/* a dónde se la postuló: índice numerado */}
             {s.postulaciones.length > 0 && (
-              <Fila>
+              <Fila bloque="postulaciones">
                 <Rotulo>A dónde te postulamos</Rotulo>
                 <ol className="m-0 list-none p-0">
                   {s.postulaciones.map((p, i) => (
@@ -207,7 +213,7 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
 
             {/* novedades: estado como rótulo de color a la izquierda (arriba de la frase en el celular) */}
             {s.novedades.length > 0 && (
-              <Fila>
+              <Fila bloque="novedades">
                 <Rotulo>Novedades de empresas</Rotulo>
                 <ul className="m-0 list-none p-0">
                   {s.novedades.map((n, i) => (
@@ -223,16 +229,16 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
             )}
 
             {/* la búsqueda completa: banda hielo con tres cifras y filetes verticales */}
-            <Fila filete={false} className="bg-ice">
+            <Fila filete={false} className="bg-ice" bloque="busqueda">
               <Rotulo color="text-slate">Tu búsqueda desde el {mailDesde}</Rotulo>
-              <dl className="m-0 grid grid-cols-3">
+              <dl className={`m-0 grid ${hero ? "grid-cols-1 gap-3" : "grid-cols-3"}`}>
                 {[
                   [b.postulaciones, palabra(b.postulaciones, "postulación", "postulaciones")],
                   [b.vistos, palabra(b.vistos, "CV visto", "CV vistos")],
                   [b.enProceso, "en proceso" + (b.entrevistas ? ` · ${b.entrevistas} ${palabra(b.entrevistas, "entrevista", "entrevistas")}` : "")],
                 ].map(([v, label], i) => (
-                  <div key={String(label)} className={`flex flex-col-reverse justify-end ${i ? "border-l border-line pl-[18px]" : ""}`}>
-                    <dt className="mt-2 text-[13px] leading-[1.4] text-slate @min-[680px]:text-[14px]">{label}</dt>
+                  <div key={String(label)} className={hero ? "flex flex-row-reverse items-baseline justify-end gap-2.5" : `flex flex-col-reverse justify-end ${i ? "border-l border-line pl-[18px]" : ""}`}>
+                    <dt className="mt-2 text-[13px] [.mail-hero_&]:mt-0 leading-[1.4] text-slate @min-[680px]:text-[14px]">{label}</dt>
                     <dd className="m-0 text-[30px] leading-none tracking-[-1px] text-brand @min-[680px]:text-[34px]" style={NUM}>
                       {v}
                     </dd>
@@ -246,7 +252,7 @@ export function EmailSummary({ scenario: s, compact = false }: { scenario: MailS
 
       {/* pie, fuera de la tarjeta */}
       {!compact && (
-        <div className="px-6 pt-8 @min-[680px]:mx-auto @min-[680px]:max-w-[640px] @min-[680px]:px-12">
+        <div data-bloque="pie" className="px-6 pt-8 @min-[680px]:mx-auto @min-[680px]:max-w-[640px] @min-[680px]:px-12">
           <p className="m-0 text-[18px] font-extrabold leading-[1.3] tracking-[-0.3px]" style={{ fontFamily: FONT_LOGO }}>
             {mailFirma}
           </p>

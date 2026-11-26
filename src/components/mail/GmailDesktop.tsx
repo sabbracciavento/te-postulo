@@ -1,14 +1,18 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import type { MailScenario } from "@/content/mail";
 import { EmailSummary } from "./EmailSummary";
 import { GIcon, GmailLogo, type IconName } from "./GmailIcons";
 
 /** seccion: la ventana completa de la sección del mail (recorrible) · hero: más baja (440 px), decorativa, sin barra lateral
  *  por debajo de 1280 px y con el comienzo del mail con fundido. */
-type Props = { scenario: MailScenario; inboxCount: number; position: number; variante?: "seccion" | "hero" };
+type Props = { scenario: MailScenario; inboxCount: number; position: number; variante?: "seccion" | "hero";
+  /** hero: el contenido del panel del mensaje (asunto + mail), lo arma HeroDispositivos */
+  cuerpo?: ReactNode;
+};
 
 /** Mensaje abierto en Gmail web (vista de escritorio, Material 3). */
-export function GmailDesktop({ scenario, inboxCount, position, variante = "seccion" }: Props) {
+export function GmailDesktop({ scenario, inboxCount, position, variante = "seccion", cuerpo }: Props) {
   const hero = variante === "hero";
   const ic = "h-5 w-5 text-[#444746]";
   const tool = (name: IconName) => (
@@ -109,22 +113,8 @@ export function GmailDesktop({ scenario, inboxCount, position, variante = "secci
 
           {/* el mail se recorre adentro: foco de teclado, rueda contenida y un fundido abajo que avisa que sigue */}
           {hero ? (
-            // hero: una sola línea de remitente y asunto, y el mail a escala (68 %) para que se lea hasta la cifra del día;
-            // el fundido recién después. Decorativo: sin foco ni scroll.
-            <div className="flex min-h-0 flex-1 flex-col">
-              <div className="flex h-11 shrink-0 items-center gap-2.5 border-b border-[#e8eaed] px-4">
-                <Image src="/brand/tp-circulo-96.png" alt="" width={24} height={24} className="h-6 w-6 shrink-0 rounded-full" />
-                <span className="shrink-0 text-[13px] font-medium">TePostulo</span>
-                <span className="min-w-0 flex-1 truncate text-[13px] text-[#444746]">{scenario.subject}</span>
-                <span className="shrink-0 text-[12px] text-[#444746]">{scenario.hora}</span>
-              </div>
-              <div className="min-h-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_bottom,black_calc(100%-40px),transparent)]">
-                {/* margen derecho del tamaño del solape del celular (~16 %): el título no queda debajo del teléfono */}
-                <div className="pr-[17%]" style={{ zoom: 0.68 }}>
-                  <EmailSummary scenario={scenario} compact />
-                </div>
-              </div>
-            </div>
+            // hero: la línea de remitente y asunto y el mail completo, que recorre HeroDispositivos (capas por escenario). Decorativo.
+            <div className="relative min-h-0 flex-1">{cuerpo}</div>
           ) : (
           <div
             className="min-h-0 flex-1 overflow-y-auto overscroll-contain [mask-image:linear-gradient(to_bottom,black_calc(100%-56px),transparent)] focus-visible:outline-offset-[-3px]"
