@@ -6,6 +6,23 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 
 ## [Sin publicar]
 
+## [2.0.0] - 2026-11-26
+
+Rediseño completo del sitio con la identidad nueva de TePostulo. Publicado en https://tepostulo.com.ar.
+
+### Resumen
+- Identidad nueva: monograma TP, paleta azul, Manrope e Instrument Sans, tokens de diseño en variables CSS con Tailwind v4.
+- Home rehecha: hero con el mismo mail en la compu y en el celular, cómo funciona y qué pedimos para empezar, un caso con cifras y su
+  contexto, la maqueta del resumen diario (Gmail de escritorio, teléfono y celular), planes Base y Plus, confianza, preguntas y cierre.
+- Contacto por WhatsApp o Instagram en todo el sitio; sin horario de atención.
+- Responsive por breakpoint (celular, tablet, escritorio y celular en horizontal), accesibilidad AA (pestañas ARIA, foco visible,
+  objetivos táctiles de 44 px, reduced-motion), SEO (Open Graph generada, JSON-LD, canonical) y Lighthouse móvil 98/100/100/100.
+- Next.js 16.4.6 (corrige advertencias de seguridad de 16.0–16.4.4), `poweredByHeader` desactivado, build de producción que se corta
+  si faltan variables obligatorias.
+- README como caso de estudio, con capturas tomadas de producción.
+
+### Detalle
+
 ### Cambiado (contacto y hero)
 - **Contacto por WhatsApp o Instagram** (@te.postulo), dos canales igual de válidos: WhatsApp relleno e Instagram con contorno, del mismo
   alto, en el encabezado ("Contacto" + dos íconos en escritorio, dos íconos en tablet), el hero, la barra fija del celular (50/50), el cierre,
