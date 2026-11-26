@@ -57,7 +57,7 @@ No garantizamos trabajo: las empresas deciden a quién entrevistan y contratan.
 | **Base** | Todo el servicio: postulación diaria en portales de empleo y por mail, CV en dos versiones y carta por aviso, envío del CV a empresas que encajan aunque no tengan aviso, casilla de búsqueda, resumen diario, guía para el perfil de LinkedIn y avisos de LinkedIn numerados para que la persona se postule en 2 minutos. |
 | **Plus** | Todo lo de Base y, además, la postulación en LinkedIn desde la cuenta de la persona, con su autorización. |
 
-El precio depende del perfil y se consulta por WhatsApp.
+El precio depende del perfil y se consulta por WhatsApp o Instagram.
 
 ## El sitio
 
@@ -65,15 +65,15 @@ Una sola página, pensada para leerse en el celular en dos minutos, más la pol�
 
 | Bloque | Qué resuelve |
 | --- | --- |
-| **Hero** | La promesa ("Nos postulamos por vos."), una línea de bajada y el botón de WhatsApp. En móvil, barra de acción fija. |
+| **Hero** | La promesa ("Nos postulamos por vos."), la bajada, los botones de WhatsApp e Instagram y el mismo mail en la compu y en el celular. En el celular, barra de contacto fija. |
 | **Lo que hacemos por vos** | Tres fichas: avisos que encajan, dos versiones del CV, postulaciones verificadas. |
-| **Cómo funciona** | Cuatro pasos (nos escribís por WhatsApp, armamos tu perfil, postulamos por vos, recibís tu resumen) y lo que pedimos para empezar. |
+| **Cómo funciona** | Cuatro pasos (nos escribís por WhatsApp o Instagram, armamos tu perfil, postulamos por vos, recibís tu resumen) y lo que pedimos para empezar. |
 | **Un caso real** | Avisos revisados, postulaciones verificadas y entrevistas de un caso inicial, con perfil, período y la aclaración de que los resultados no están garantizados. |
 | **El mail** | Maqueta del resumen diario en Gmail (móvil y escritorio), con datos ficticios aclarados en una nota al pie. |
 | **Planes** | Base y Plus, sin precios ni cuotas. |
 | **Confianza** | "No necesitamos la contraseña de tu mail personal." y cómo se cuidan los datos. |
 | **Preguntas frecuentes** | Once respuestas cortas a las dudas de siempre, LinkedIn incluido. |
-| **Cierre** | "Contanos qué trabajo buscás." y el botón de WhatsApp. |
+| **Cierre** | "Contanos qué trabajo buscás." y los botones de WhatsApp e Instagram. |
 
 <p align="center">
   <img src="docs/img/home-movil.png" alt="Home en móvil" width="260">
@@ -113,8 +113,8 @@ Un resumen por día, pensado para leerse en un minuto. La maqueta es el mismo ma
 
 Decisiones de producto reflejadas en el código:
 
-- **Un solo llamado a la acción**: "Escribinos por WhatsApp", con un mensaje precargado sin datos personales. Si falta
-  el número, el botón muestra el bloqueo en lugar de un link roto.
+- **Contacto por dos canales igual de válidos**: WhatsApp (con un mensaje precargado sin datos personales) e Instagram
+  [@te.postulo](https://www.instagram.com/te.postulo/). Si falta el número de WhatsApp, en desarrollo el botón se ve deshabilitado.
 - **Cifras con contexto**: las del caso inicial van siempre con perfil, período y la aclaración de resultados no garantizados.
 - **Nada de formularios ni base de datos** en el sitio: menos superficie, menos datos personales en tránsito.
 
@@ -155,7 +155,7 @@ src/
 │  ├─ layout/               Header, Footer, barra de acción móvil
 │  ├─ sections/             los nueve bloques de la home
 │  ├─ mail/                 maqueta de Gmail (móvil y escritorio) y el mail de resumen
-│  └─ ui/                   logo, botón de WhatsApp, íconos
+│  └─ ui/                   logo, botones de contacto (WhatsApp e Instagram), bandera, íconos
 └─ content/                 todos los textos del sitio (site, home, mail, privacidad)
 public/brand/               monograma TP: círculo, TP sola (blanca y azul) y avatar cuadrado
 docs/img/                   capturas usadas en este README
@@ -193,7 +193,7 @@ original sin redibujarlo. No deformar, no rotar, no cambiar el dibujo.
 ## Contacto
 
 - Sitio: [tepostulo.com.ar](https://tepostulo.com.ar)
-- Consultas sobre el servicio: por WhatsApp desde el sitio.
+- Consultas sobre el servicio: por WhatsApp o por Instagram, [@te.postulo](https://www.instagram.com/te.postulo/).
 - Consultas sobre el código: abrí un [issue](https://github.com/sabbracciavento/te-postulo/issues).
 
 ## Licencia

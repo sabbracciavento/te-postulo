@@ -11,10 +11,12 @@ type Props = {
   cropped?: boolean;
   /** hora de la barra de estado (coherente con la hora del mail que se muestra) */
   hora?: string;
+  /** alto fijo de la pantalla en px (teléfono entero en proporción real): el contenido se corta adentro, con fundido */
+  pantalla?: number;
 };
 
 /** Teléfono Android genérico dibujado en CSS. Sin marcas. */
-export function PhoneFrame({ children, notification, className = "", cropped = false, hora = "18:02" }: Props) {
+export function PhoneFrame({ children, notification, className = "", cropped = false, hora = "18:02", pantalla }: Props) {
   return (
     <div
       className={`relative mx-auto w-full max-w-[380px] rounded-[2.4rem] border-[10px] border-ink bg-ink ${
@@ -23,7 +25,10 @@ export function PhoneFrame({ children, notification, className = "", cropped = f
       aria-label="Ejemplo del mail de resumen en el celular, abierto en Gmail"
       role="group"
     >
-      <div className={`overflow-hidden bg-white ${cropped ? "rounded-t-[1.8rem]" : "rounded-[1.8rem]"}`}>
+      <div
+        className={`overflow-hidden bg-white ${cropped ? "rounded-t-[1.8rem]" : "rounded-[1.8rem]"} ${pantalla ? "relative" : ""}`}
+        style={pantalla ? { height: pantalla } : undefined}
+      >
         {/* barra de estado Android simplificada */}
         <div className="flex items-center justify-between bg-white px-5 pb-0.5 pt-2.5 font-gmail text-[12px] font-medium text-[#1f1f1f]">
           <span>{hora}</span>
@@ -54,6 +59,8 @@ export function PhoneFrame({ children, notification, className = "", cropped = f
         )}
 
         <div className={notification ? "mt-2" : ""}>{children}</div>
+        {/* pantalla de alto fijo: el mail sigue hacia abajo; un fundido a blanco lo indica sin cortar en seco */}
+        {pantalla && <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-white/0 to-white" />}
       </div>
     </div>
   );

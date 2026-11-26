@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { ContactButtons } from "@/components/ui/ContactButtons";
 
-/** Barra fija inferior, solo celular (< 768 px; en tablet el WhatsApp está en el encabezado): aparece al pasar el hero y se oculta en el cierre. */
+/** Barra fija inferior, solo celular (< 768 px; en tablet el contacto está en el encabezado): WhatsApp e Instagram al 50 %,: aparece al pasar el hero y se oculta en el cierre. */
 export function MobileCtaBar() {
   const [show, setShow] = useState(false);
 
@@ -37,7 +37,7 @@ export function MobileCtaBar() {
       inert={!show}
     >
       <div className="px-6 py-3">
-        <WhatsAppButton className="w-full" />
+        <ContactButtons />
       </div>
     </div>
   );

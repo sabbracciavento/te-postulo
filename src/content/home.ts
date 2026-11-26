@@ -25,7 +25,7 @@ export const benefits = {
 export const steps = {
   title: "Cómo funciona",
   items: [
-    { title: "Nos escribís por WhatsApp", text: "Nos contás qué buscás. Con o sin CV: si no tenés, lo armamos con vos." },
+    { title: "Nos escribís", text: "Por WhatsApp o Instagram, nos contás qué buscás. Con o sin CV: si no tenés, lo armamos." },
     { title: "Armamos tu perfil", text: "Tu CV en dos versiones y una casilla de mail solo para la búsqueda." },
     { title: "Postulamos por vos", text: "Los días hábiles, a lo que encaja con vos, con una carta para cada aviso." },
     { title: "Recibís tu resumen", text: "Un mail por día con lo que hicimos y lo que avanzó." },
@@ -56,7 +56,7 @@ export const mailSection = {
 
 export const plans = {
   title: "Dos planes: Base y Plus",
-  footer: "El precio depende de tu perfil. Consultanos por WhatsApp.",
+  footer: "El precio depende de tu perfil. Consultanos por WhatsApp o Instagram.",
   base: {
     tag: "Base",
     title: "Todo el servicio",
@@ -102,17 +102,17 @@ export const faq = {
     { q: "¿Me garantizan trabajo?", a: "No. Nos ocupamos de las postulaciones y del seguimiento; las empresas deciden a quién entrevistan y contratan." },
     { q: "¿Tengo que darles mis contraseñas?", a: "No pedimos la de tu mail personal: trabajamos con una casilla de búsqueda aparte, que también es tuya. En el plan Plus, para LinkedIn iniciás sesión vos una vez." },
     { q: "¿Cómo sé qué hicieron?", a: "Recibís un resumen por mail con las postulaciones del día, los avances que informan las empresas y lo que necesitamos de vos." },
-    { q: "¿Y si una empresa me escribe para una entrevista?", a: "Te avisamos cuando recibimos la comunicación, en nuestro horario de atención, y podemos prepararte una respuesta." },
+    { q: "¿Y si una empresa me escribe para una entrevista?", a: "Te avisamos apenas recibimos la comunicación y podemos prepararte una respuesta." },
     { q: "¿Y LinkedIn?", a: "En el plan Base te pasamos los avisos de LinkedIn numerados en el resumen: te postulás vos (son 2 minutos) y respondés con los números. En el Plus nos postulamos nosotros desde tu cuenta, con tu autorización." },
     { q: "No tengo CV, ¿sirve igual?", a: "Sí. Lo armamos con vos, en dos versiones." },
     { q: "¿Sirve para mi rubro?", a: "Trabajamos con perfiles administrativos, de atención al cliente, recepción, logística, comunicación y redes, primer empleo y más. Antes de empezar miramos cuántos avisos hay para tu perfil y te contamos qué esperar." },
     { q: "¿Dónde trabajan?", a: "En CABA y Gran Buenos Aires. Filtramos los avisos por la zona en la que podés trabajar." },
-    { q: "¿Cuánto cuesta?", a: "Hay dos planes, Base y Plus. El precio depende de tu perfil: consultanos por WhatsApp." },
+    { q: "¿Cuánto cuesta?", a: "Hay dos planes, Base y Plus. El precio depende de tu perfil: consultanos por WhatsApp o Instagram." },
     { q: "¿Puedo frenar el servicio?", a: "Sí, cuando quieras. También podés pedirnos ver, corregir o borrar tus datos, como explica la política de privacidad." },
   ],
 };
 
 export const closing = {
   title: "Contanos qué trabajo buscás.",
-  text: "Te respondemos por WhatsApp y vemos juntos si el servicio te sirve.",
+  text: "Escribinos por WhatsApp o Instagram y vemos juntos si el servicio te sirve.",
 };

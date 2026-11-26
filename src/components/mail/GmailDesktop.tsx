@@ -3,10 +3,13 @@ import type { MailScenario } from "@/content/mail";
 import { EmailSummary } from "./EmailSummary";
 import { GIcon, GmailLogo, type IconName } from "./GmailIcons";
 
-type Props = { scenario: MailScenario; inboxCount: number; position: number };
+/** seccion: la ventana completa de la sección del mail (recorrible) · hero: más baja (440 px), decorativa, sin barra lateral
+ *  por debajo de 1280 px y con el comienzo del mail con fundido. */
+type Props = { scenario: MailScenario; inboxCount: number; position: number; variante?: "seccion" | "hero" };
 
 /** Mensaje abierto en Gmail web (vista de escritorio, Material 3). */
-export function GmailDesktop({ scenario, inboxCount, position }: Props) {
+export function GmailDesktop({ scenario, inboxCount, position, variante = "seccion" }: Props) {
+  const hero = variante === "hero";
   const ic = "h-5 w-5 text-[#444746]";
   const tool = (name: IconName) => (
     <span key={name} className="grid h-9 w-9 place-items-center rounded-full">
@@ -25,26 +28,41 @@ export function GmailDesktop({ scenario, inboxCount, position }: Props) {
   return (
     <div className="overflow-hidden rounded-xl border border-line bg-[#f6f8fc] font-gmail text-[#1f1f1f]" role="group" aria-label="Ejemplo del mail de resumen abierto en Gmail">
       {/* barra superior */}
-      <div className="flex h-16 items-center gap-3 px-3">
+      <div className={`flex items-center gap-3 px-3 ${hero ? "h-14" : "h-16"}`}>
         <span className="grid h-12 w-12 place-items-center"><GIcon name="menu" className="h-6 w-6 text-[#444746]" /></span>
-        <span className="flex w-[180px] items-center gap-2">
+        <span className={`flex items-center gap-2 ${hero ? "w-auto shrink-0 xl:w-[148px]" : "w-[180px]"}`}>
           <GmailLogo className="h-8 w-8" />
           <span className="text-[22px] text-[#444746]">Gmail</span>
         </span>
-        <div className="flex h-12 max-w-[720px] flex-1 items-center gap-3 rounded-full bg-[#e9eef6] px-4">
-          <GIcon name="search" className="h-6 w-6 text-[#444746]" />
-          <span className="text-[16px] text-[#444746]">Buscar en el correo</span>
+        <div className={`flex max-w-[720px] min-w-0 flex-1 items-center gap-3 rounded-full bg-[#e9eef6] px-4 ${hero ? "h-10" : "h-12"}`}>
+          <GIcon name="search" className="h-6 w-6 shrink-0 text-[#444746]" />
+          <span className={`truncate text-[16px] text-[#444746] ${hero ? "max-xl:hidden" : ""}`}>Buscar en el correo</span>
         </div>
         <span className="flex-1" />
-        <GIcon name="help" className="h-6 w-6 text-[#444746]" />
-        <GIcon name="settings" className="mx-3 h-6 w-6 text-[#444746]" />
-        <GIcon name="apps" className="h-6 w-6 text-[#444746]" />
+        {!hero && (
+          <>
+            <GIcon name="help" className="h-6 w-6 text-[#444746]" />
+            <GIcon name="settings" className="mx-3 h-6 w-6 text-[#444746]" />
+            <GIcon name="apps" className="h-6 w-6 text-[#444746]" />
+          </>
+        )}
         <span className="ml-2 grid h-8 w-8 place-items-center rounded-full bg-[#5f6368] text-[14px] font-medium text-white">A</span>
       </div>
 
-      <div className="grid h-[min(660px,calc(100svh-240px))] grid-cols-[232px_1fr]">
+      <div className={hero ? "grid h-[384px] grid-cols-1 xl:grid-cols-[64px_1fr]" : "grid h-[min(660px,calc(100svh-240px))] grid-cols-[232px_1fr]"}>
+        {/* hero desde 1280 px: la barra lateral angosta de Gmail (solo íconos), para dejarle el ancho al mail */}
+        {hero && (
+          <div className="hidden flex-col items-center gap-3 pt-2 xl:flex">
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#c2e7ff] text-[#001d35]"><GIcon name="edit" className="h-6 w-6" /></span>
+            {nav.slice(0, 5).map(([icon, label, active]) => (
+              <span key={label} className={`grid h-8 w-12 place-items-center rounded-full ${active ? "bg-[#d3e3fd]" : "text-[#444746]"}`}>
+                <GIcon name={icon} className="h-5 w-5" />
+              </span>
+            ))}
+          </div>
+        )}
         {/* navegación izquierda */}
-        <div className="px-3 pt-2">
+        <div className={`px-3 pt-2 ${hero ? "hidden" : ""}`}>
           <span className="flex h-14 w-[138px] items-center gap-4 rounded-2xl bg-[#c2e7ff] pl-4 text-[14px] font-medium text-[#001d35] shadow-sm">
             <GIcon name="edit" className="h-6 w-6" /> Redactar
           </span>
@@ -60,20 +78,25 @@ export function GmailDesktop({ scenario, inboxCount, position }: Props) {
         </div>
 
         {/* panel del mensaje */}
-        <div className="mr-3 mb-3 flex min-h-0 flex-col overflow-hidden rounded-2xl bg-white">
+        <div className={`mb-3 flex min-h-0 flex-col overflow-hidden rounded-2xl bg-white ${hero ? "mx-3 xl:ml-0" : "mr-3"}`}>
+          {!hero && (
           <div className="flex h-12 items-center gap-0.5 border-b border-[#e8eaed] px-2">
             {tool("back")}
             <span className="mx-1 h-5 w-px bg-[#e0e0e0]" />
             {tool("archive")}
-            {tool("report")}
+            {!hero && tool("report")}
             {tool("delete")}
             <span className="mx-1 h-5 w-px bg-[#e0e0e0]" />
             {tool("mail")}
-            {tool("schedule")}
-            {tool("task")}
-            <span className="mx-1 h-5 w-px bg-[#e0e0e0]" />
-            {tool("folder")}
-            {tool("label")}
+            {!hero && (
+              <>
+                {tool("schedule")}
+                {tool("task")}
+                <span className="mx-1 h-5 w-px bg-[#e0e0e0]" />
+                {tool("folder")}
+                {tool("label")}
+              </>
+            )}
             {tool("more")}
             <span className="flex-1" />
             <span className="text-[12px] text-[#444746]">
@@ -82,8 +105,27 @@ export function GmailDesktop({ scenario, inboxCount, position }: Props) {
             {tool("left")}
             {tool("right")}
           </div>
+          )}
 
           {/* el mail se recorre adentro: foco de teclado, rueda contenida y un fundido abajo que avisa que sigue */}
+          {hero ? (
+            // hero: una sola línea de remitente y asunto, y el mail a escala (68 %) para que se lea hasta la cifra del día;
+            // el fundido recién después. Decorativo: sin foco ni scroll.
+            <div className="flex min-h-0 flex-1 flex-col">
+              <div className="flex h-11 shrink-0 items-center gap-2.5 border-b border-[#e8eaed] px-4">
+                <Image src="/brand/tp-circulo-96.png" alt="" width={24} height={24} className="h-6 w-6 shrink-0 rounded-full" />
+                <span className="shrink-0 text-[13px] font-medium">TePostulo</span>
+                <span className="min-w-0 flex-1 truncate text-[13px] text-[#444746]">{scenario.subject}</span>
+                <span className="shrink-0 text-[12px] text-[#444746]">{scenario.hora}</span>
+              </div>
+              <div className="min-h-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_bottom,black_calc(100%-40px),transparent)]">
+                {/* margen derecho del tamaño del solape del celular (~16 %): el título no queda debajo del teléfono */}
+                <div className="pr-[17%]" style={{ zoom: 0.68 }}>
+                  <EmailSummary scenario={scenario} compact />
+                </div>
+              </div>
+            </div>
+          ) : (
           <div
             className="min-h-0 flex-1 overflow-y-auto overscroll-contain [mask-image:linear-gradient(to_bottom,black_calc(100%-56px),transparent)] focus-visible:outline-offset-[-3px]"
             tabIndex={0}
@@ -124,6 +166,7 @@ export function GmailDesktop({ scenario, inboxCount, position }: Props) {
               <GIcon name="emoji" className={`ml-1 ${ic}`} />
             </div>
           </div>
+          )}
         </div>
       </div>
     </div>

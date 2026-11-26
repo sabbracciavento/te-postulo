@@ -3,7 +3,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { privacidad } from "@/content/privacidad";
 import { site } from "@/content/site";
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { ContactButtons } from "@/components/ui/ContactButtons";
 
 const description = `Cómo usa ${site.name} tus datos: para qué, quién interviene, cuánto tiempo y cómo pedir que los borremos.`;
 
@@ -40,8 +40,8 @@ export default function PrivacidadPage() {
               ))}
               <section>
                 <h2 className="t-h3">Contacto</h2>
-                <p className="mt-2 text-slate">Para cualquier pedido sobre tus datos, escribinos por WhatsApp. {site.hours}.</p>
-                <WhatsAppButton className="mt-4" />
+                <p className="mt-2 text-slate">Para cualquier pedido sobre tus datos, escribinos por WhatsApp o Instagram.</p>
+                <ContactButtons className="mt-4" />
               </section>
             </div>
           </article>

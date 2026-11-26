@@ -1,5 +1,5 @@
 import { site } from "@/content/site";
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { ContactButtons } from "@/components/ui/ContactButtons";
 import { Logo } from "@/components/ui/Logo";
 
 export function Header() {
@@ -13,12 +13,10 @@ export function Header() {
               {n.label}
             </a>
           ))}
-          <WhatsAppButton />
+          <ContactButtons variante="compacto" />
         </nav>
-        {/* tablet: sin menú; el CTA queda a mano. En el celular (≤ 767 px) no va: ya está la barra fija de abajo */}
-        <div className="hidden md:block lg:hidden">
-          <WhatsAppButton variant="icon" />
-        </div>
+        {/* tablet: sin menú; el contacto queda a mano. En el celular (≤ 767 px) no va: ya está la barra fija de abajo */}
+        <ContactButtons variante="iconos" className="hidden md:flex lg:hidden" />
       </div>
     </header>
   );

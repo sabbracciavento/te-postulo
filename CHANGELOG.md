@@ -6,6 +6,20 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 
 ## [Sin publicar]
 
+### Cambiado (contacto y hero)
+- **Contacto por WhatsApp o Instagram** (@te.postulo), dos canales igual de válidos: WhatsApp relleno e Instagram con contorno, del mismo
+  alto, en el encabezado ("Contacto" + dos íconos en escritorio, dos íconos en tablet), el hero, la barra fija del celular (50/50), el cierre,
+  /privacidad, la 404 y el pie. Los textos que decían "por WhatsApp" pasan a "por WhatsApp o Instagram". JSON-LD con `sameAs` a Instagram.
+- **Sin horario de atención** en todo el sitio. "CABA y Gran Buenos Aires" con la bandera argentina en SVG (no el emoji, que en Windows
+  se ve como "AR").
+- **Hero con la compu y el celular**: la ventana de Gmail atrás (variante de 440 px; desde 1280 px con la barra lateral angosta) y el
+  celular entero adelante, en proporción real (~216 × 444 px), superpuesto abajo a la derecha, con el mismo mail. El hero mide lo que su
+  contenido. En el celular, el teléfono asoma con su borde y se funde abajo. Antes, en escritorio, el teléfono crecía con la ventana y se
+  veía larguísimo y cortado.
+- Hero legible: el celular tapa solo el borde derecho de la ventana (≈ 16 %); la ventana muestra una línea de remitente y el mail a
+  escala, legible hasta "9 postulaciones hoy"; el celular muestra la notificación y directamente el cuerpo del mail (título ≈ 17 px,
+  cifra ≈ 46 px en pantalla).
+
 ### Cambiado (contenido)
 - Sin rótulos "Ejemplo ilustrativo" en las maquetas del mail (teléfono del hero, ventana de Gmail y mail del celular): la única
   aclaración es la nota chica al pie de la sección ("Datos ficticios…"). Sin hueco donde estaba el rótulo.

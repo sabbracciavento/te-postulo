@@ -21,6 +21,7 @@ export default function Home() {
       name: site.name,
       url: site.url,
       logo: `${site.url}/brand/tp-circulo-512.png`,
+      sameAs: [site.instagram.url],
       description: site.description,
       areaServed: "Ciudad Autónoma de Buenos Aires y Gran Buenos Aires, Argentina",
     },

@@ -8,13 +8,14 @@ export const site = {
   url:
     process.env.NEXT_PUBLIC_SITE_URL ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
-  hours: "Atención por WhatsApp de 12 a 20 h",
+  // Contacto: dos canales igual de válidos (decisión del dueño, 26-11-2026; reemplaza el "CTA único WhatsApp" del kit).
   whatsapp: {
     number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "",
-    label: "Escribinos por WhatsApp",
     // Sin datos personales en el texto precargado (kit, ESPECIFICACION).
     message: "Hola, quiero saber cómo funciona TePostulo para mi perfil.",
   },
+  instagram: { handle: "@te.postulo", url: "https://www.instagram.com/te.postulo/" },
+  contacto: { titulo: "Hablemos", texto: "Escribinos por WhatsApp o Instagram, como te quede más cómodo." },
   nav: [
     // con "/" adelante: también funcionan desde /privacidad y la 404
     { href: "/#como-funciona", label: "Cómo funciona" },
