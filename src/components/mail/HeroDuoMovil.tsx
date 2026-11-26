@@ -12,7 +12,8 @@ export function HeroDuoMovil({ ventana, celular, selector }: { ventana: ReactNod
   return (
     <div className="@container w-full">
       <div className="relative aspect-[342/360] w-full font-sans text-ink">
-        <div aria-hidden="true">
+        {/* decorativo y sin interacción: el mail baja solo, no se scrollea a mano */}
+        <div aria-hidden="true" className="pointer-events-none select-none">
           {/* banda inclinada del TP, detrás */}
           <span className="tp-slant pointer-events-none absolute inset-y-[2cqw] left-[50cqw] w-[24cqw] bg-brand" />
 

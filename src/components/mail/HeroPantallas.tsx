@@ -27,6 +27,9 @@ const MAIL: Record<Escala, { ventana: CSSProperties; celular: CSSProperties }> =
   },
 };
 
+/* 24 px de desvanecido arriba y abajo del visor: el mail entra y sale con suavidad (las paradas dejan el texto debajo) */
+const desvanecer = "[mask-image:linear-gradient(to_bottom,transparent,black_24px,black_calc(100%-24px),transparent)]";
+
 const opacidad = (visible: boolean): CSSProperties => ({ opacity: visible ? 1 : 0 });
 
 /** Ventana de la compu: en escritorio con la línea de remitente y asunto de Gmail; el mail a la izquierda del celular. */
@@ -43,7 +46,7 @@ export function CapaVentana({ s, i, escala }: { s: MailScenario; i: number; esca
         </div>
       )}
       {/* el visor termina antes del celular: el teléfono nunca tapa texto del mail */}
-      <div data-viewport className={`absolute overflow-hidden ${movil ? "inset-y-0 left-0 w-[50.5cqw]" : "bottom-0 left-0 right-[24%] top-11"}`}>
+      <div data-viewport className={`absolute overflow-hidden ${desvanecer} ${movil ? "inset-y-0 left-0 w-[50.5cqw]" : "bottom-0 left-0 right-[24%] top-11"}`}>
         <div data-scroller className="will-change-transform">
           <div style={MAIL[escala].ventana}>
             <EmailSummary scenario={s} hero />
@@ -76,7 +79,7 @@ export function CapaCelular({ s, i, escala }: { s: MailScenario; i: number; esca
       </div>
       {/* el mail abierto */}
       <div data-correo className="absolute inset-0 bg-white" style={{ opacity: 0 }}>
-        <div data-viewport className="absolute inset-x-0 bottom-0 top-[2.2em] overflow-hidden">
+        <div data-viewport className={`absolute inset-x-0 bottom-0 top-[2.2em] overflow-hidden ${desvanecer}`}>
           <div data-scroller className="will-change-transform">
             <div style={MAIL[escala].celular}>
               <EmailSummary scenario={s} hero />

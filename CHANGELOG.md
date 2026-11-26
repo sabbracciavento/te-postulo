@@ -6,19 +6,24 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 
 ## [Sin publicar]
 
+### Cambiado
+- Hero animado: el mail baja solo, continuo y completo, de arriba hasta el pie, en la compu y el celular a la vez (velocidad
+  constante, frenadas suaves y micro-pausas en la cifra o la entrevista, lo que hay que hacer, la lista, las novedades y los totales),
+  con 1,5 s en el pie y fundido al mail siguiente. Cada mail dura 30 s.
+- La animación ya no se frena con el puntero encima ni con el foco: se pausa con un botón visible (Pausar/Reproducir) junto a las
+  pastillas, con la pestaña oculta y con el hero fuera de la vista. Con `prefers-reduced-motion` no arranca sola; el botón la inicia.
+- Los dispositivos no responden al mouse (sin scroll manual) y el mail entra y sale con un desvanecido de 24 px arriba y abajo.
+
+## [2.1.0] - 2026-11-26
+
 ### Agregado
-- Hero animado con los tres tipos de mail (un día normal, una entrevista y cuando necesitamos algo de la persona), en el celular y en
-  tablet/escritorio. Cada mail es una secuencia corta: entra la notificación al celular, se abre el mail y la compu y el celular lo
-  recorren entero, bloque por bloque y sincronizados (el celular un bloque adelante), con pausas; al final, fundido cruzado al siguiente.
-  Es el mail completo, el mismo componente de la sección del mail.
-- Pastillas con barra de progreso para elegir el mail. La animación corre solo con el hero a la vista y se pausa con el puntero encima,
-  con el foco de teclado y con la pestaña oculta; con `prefers-reduced-motion` no hay animación (el mail queda abierto en su bloque
-  principal) y se cambia con las pastillas. Sin regiones `aria-live`; los dispositivos siguen siendo decorativos.
+- Hero animado con los tres tipos de mail (un día normal, una entrevista y cuando necesitamos algo de la persona), en el celular y
+  en tablet/escritorio: notificación, apertura y recorrido del mail completo (el mismo componente de la sección del mail), con fundido
+  cruzado entre mails y pastillas con barra de progreso para elegir. Sin regiones `aria-live`; los dispositivos son decorativos.
 
 ### Cambiado
-- Hero en el celular (menos de 768 px): la compu y el celular en una composición propia, entera y legible, en lugar del teléfono grande
-  cortado. Texto de al menos 11 px a 390 px de ancho (12 px en tablet y escritorio).
-- Hero en tablet y escritorio: el mail a tamaño de lectura, sin fundidos sobre el texto y sin nada debajo del celular.
+- Hero en el celular (menos de 768 px): la compu y el celular en una composición propia, entera y legible. Texto de al menos 11 px
+  a 390 px de ancho (12 px en tablet y escritorio).
 - Animación hecha solo con `transform` y `opacity` (requestAnimationFrame, desplazamientos en píxeles enteros): 60 cuadros por segundo.
 
 ## [2.0.0] - 2026-11-26
