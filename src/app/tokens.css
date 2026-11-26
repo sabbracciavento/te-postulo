@@ -1,0 +1,34 @@
+/* TePostulo design tokens v2.0 */
+:root {
+  --tp-brand: #0025CE;
+  --tp-action: #2457F5;
+  --tp-action-hover: #173DDB;
+  --tp-action-pressed: #1231B7;
+  --tp-ink: #101828;
+  --tp-slate: #526176;
+  --tp-ice: #EDF2FF;
+  --tp-cloud: #F4F6F9;
+  --tp-white: #FFFFFF;
+  --tp-border-subtle: #DCE3EE;
+  --tp-border-control: #667085;
+  --tp-success: #0F766E;
+  --tp-error: #B42318;
+  --tp-warning: #854D0E;
+  --tp-warning-bg: #FFF7E6;
+  --tp-font-display: "Manrope", system-ui, sans-serif;
+  --tp-font-body: "Instrument Sans", system-ui, sans-serif;
+  --tp-container: 1200px;
+  --tp-control-height: 48px;
+  --tp-radius-control: 8px;
+  --tp-radius-card: 12px;
+  --tp-radius-panel: 16px;
+  --tp-space-4: 4px;
+  --tp-space-8: 8px;
+  --tp-space-12: 12px;
+  --tp-space-16: 16px;
+  --tp-space-24: 24px;
+  --tp-space-32: 32px;
+  --tp-space-48: 48px;
+  --tp-space-64: 64px;
+  --tp-space-96: 96px;
+}
