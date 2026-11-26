@@ -6,6 +6,11 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 
 ## [Sin publicar]
 
+### Cambiado
+- Hero en el celular (menos de 768 px): la compu y el celular en una composición propia, entera y legible (ventana de Gmail atrás y
+  celular entero adelante, con el mismo mail: logo, título y cifra del día), en lugar del teléfono grande cortado. Escala de 320 a 767 px.
+  Tablet y escritorio sin cambios (comparación píxel a píxel: 0 diferencias).
+
 ## [2.0.0] - 2026-11-26
 
 Rediseño completo del sitio con la identidad nueva de TePostulo. Publicado en https://tepostulo.com.ar.

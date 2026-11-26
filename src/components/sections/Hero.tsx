@@ -6,6 +6,7 @@ import { BanderaAR } from "@/components/ui/BanderaAR";
 import { PhoneFrame } from "@/components/mail/PhoneFrame";
 import { GmailDesktop } from "@/components/mail/GmailDesktop";
 import { EmailSummary } from "@/components/mail/EmailSummary";
+import { HeroDuoMovil } from "@/components/mail/HeroDuoMovil";
 
 /** Banda inclinada (el trazo del TP): único gesto gráfico del hero, detrás de los dispositivos. */
 function Slant({ className = "" }: { className?: string }) {
@@ -15,13 +16,13 @@ function Slant({ className = "" }: { className?: string }) {
 /**
  * Hero. Escritorio y tablet: el mismo mail en los dos formatos en que llega, la ventana de Gmail de la compu atrás y el celular
  * entero adelante (proporción real), superpuesto abajo a la derecha. El hero mide lo que su contenido (tope de una pantalla).
- * Celular: el teléfono asoma desde arriba con su borde y se funde abajo. Celular en horizontal con poca altura: sin dispositivos.
+ * Celular: la compu y el celular en una composición propia (HeroDuoMovil). Celular en horizontal con poca altura: sin dispositivos.
  */
 export function Hero() {
   const scenario = mailScenarios[0];
   return (
     <section id="hero" className="relative overflow-hidden bg-white">
-      <div className="container-site flex min-h-[calc(100svh-4rem)] flex-col pt-10 max-[359px]:pt-7 md:min-h-0 md:pb-16 md:pt-14 apaisado:min-h-0 apaisado:pb-10 apaisado:pt-6 lg:grid lg:min-h-[min(calc(100svh-73px),760px)] lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-12">
+      <div className="container-site flex min-h-[calc(100svh-4rem)] flex-col pt-10 max-md:pb-12 max-[359px]:pt-7 md:min-h-0 md:pb-16 md:pt-14 apaisado:min-h-0 apaisado:pb-10 apaisado:pt-6 lg:grid lg:min-h-[min(calc(100svh-73px),760px)] lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-12">
         <div className="lg:col-span-5">
           <h1 className="t-h1 max-w-[11ch] motion-safe:animate-rise max-[359px]:text-[32px] md:max-w-none apaisado:text-[30px]">{hero.title}</h1>
           <p className="t-lead mt-5 max-w-[34rem] text-slate max-[359px]:text-[16px] apaisado:mt-3 apaisado:text-[17px]">{hero.lead}</p>
@@ -32,16 +33,8 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Celular: el teléfono asoma con su borde de arriba y se funde abajo (sin corte seco) */}
-        <div aria-hidden="true" className="relative -mx-6 mt-auto h-[260px] overflow-hidden px-6 pt-10 max-[359px]:h-[200px] md:hidden apaisado:hidden">
-          <Slant className="bottom-0 left-[58%] top-6 w-[34%]" />
-          <div className="relative">
-            <PhoneFrame notification={hero.notification} hora={scenario.hora} cropped>
-              <EmailSummary scenario={scenario} compact />
-            </PhoneFrame>
-          </div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-white/0 to-white" />
-        </div>
+        {/* Celular (< 768): compu + celular en versión propia, entera y legible (no el escritorio achicado) */}
+        <HeroDuoMovil scenario={scenario} notificacion={hero.notification.text} className="mt-10 md:hidden apaisado:hidden" />
 
         {/* Tablet y escritorio: compu atrás + celular entero adelante, el mismo mail */}
         <div aria-hidden="true" className="relative mt-12 hidden md:block apaisado:hidden! lg:col-span-7 lg:mt-0">
