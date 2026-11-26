@@ -350,7 +350,7 @@ export function HeroDispositivos() {
       <div ref={(el) => void (comps.current[1] = el)} className="relative mt-12 hidden md:block apaisado:hidden! lg:col-span-7 lg:mt-0">
         {/* decorativo y sin interacción: el mail baja solo, no se scrollea a mano */}
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <span className="tp-slant pointer-events-none absolute -bottom-12 -top-12 left-[44%] w-[30%] bg-[linear-gradient(135deg,#3358F0_0%,#1E40D8_55%,#1530C8_100%)]" />
+          <span className="tp-slant pointer-events-none absolute -bottom-12 -top-12 left-[44%] w-[30%] bg-[linear-gradient(135deg,#4268F5_0%,#1E40D8_50%,#14289E_100%)]" />
           {/* margen a la derecha: el celular (~216 px) tapa solo el borde derecho de la ventana, ~15–19 % de su ancho */}
           <div className="relative pb-16 pr-36 xl:pr-32">
             <GmailDesktop

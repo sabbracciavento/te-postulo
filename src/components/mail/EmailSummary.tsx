@@ -95,7 +95,7 @@ export function EmailSummary({ scenario: s, compact = false, hero = false }: { s
         {/* entrevista: tarjeta con degradé suave y aire alrededor (el cobalto plano de borde a borde se veía duro en Gmail) */}
         {s.entrevista && (
           <div data-bloque="entrevista" className="px-6 pb-12 @min-[680px]:px-12">
-            <div className="rounded-[20px] bg-[#1E40D8] bg-[linear-gradient(135deg,#3358F0_0%,#1E40D8_55%,#1530C8_100%)] px-6 py-7 text-white @min-[680px]:px-9 @min-[680px]:pb-[34px] @min-[680px]:pt-9">
+            <div className="rounded-[20px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.18),0_14px_32px_-12px_rgba(20,40,158,0.45)] bg-[#1E40D8] bg-[linear-gradient(135deg,#4268F5_0%,#1E40D8_50%,#14289E_100%)] px-6 py-7 text-white @min-[680px]:px-9 @min-[680px]:pb-[34px] @min-[680px]:pt-9">
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
                 <p className="m-0 mb-3.5 text-[12px] font-bold uppercase leading-[1.4] tracking-[1.6px]">Tenés una entrevista</p>

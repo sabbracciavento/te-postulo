@@ -13,7 +13,7 @@ export function Evidence() {
       aria-labelledby="evidencia-titulo"
     >
       <div className="container-site">
-        <div className="relative overflow-hidden rounded-[20px] bg-[#1E40D8] bg-[linear-gradient(135deg,#3358F0_0%,#1E40D8_55%,#1530C8_100%)] px-6 py-10 text-white md:static md:overflow-visible md:rounded-none md:bg-none md:bg-transparent md:p-0">
+        <div className="relative overflow-hidden rounded-[20px] bg-[#1E40D8] bg-[linear-gradient(135deg,#4268F5_0%,#1E40D8_50%,#14289E_100%)] px-6 py-10 text-white md:static md:overflow-visible md:rounded-none md:bg-none md:bg-transparent md:p-0">
           {/* gesto: un trazo inclinado del TP asomando por la derecha */}
           <span
             aria-hidden="true"
