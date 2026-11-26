@@ -7,12 +7,14 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 ## [Sin publicar]
 
 ### Cambiado
-- Hero animado: el mail baja solo, continuo y completo, de arriba hasta el pie, en la compu y el celular a la vez (velocidad
-  constante, frenadas suaves y micro-pausas en la cifra o la entrevista, lo que hay que hacer, la lista, las novedades y los totales),
-  con 1,5 s en el pie y fundido al mail siguiente. Cada mail dura 30 s.
-- La animación ya no se frena con el puntero encima ni con el foco: se pausa con un botón visible (Pausar/Reproducir) junto a las
-  pastillas, con la pestaña oculta y con el hero fuera de la vista. Con `prefers-reduced-motion` no arranca sola; el botón la inicia.
-- Los dispositivos no responden al mouse (sin scroll manual) y el mail entra y sale con un desvanecido de 24 px arriba y abajo.
+- Hero animado: el mail se recorre con swipes, como un dedo en el celular (o el trackpad en la compu), en lugar del desplazamiento
+  continuo. Cada swipe es un arrastre breve y la inercia que frena sola (curva exponencial, como en iOS) hasta caer exacto en el
+  bloque siguiente; ahí queda quieto 1,8 s para leerse. Recorre el tope, la cifra o la entrevista, lo que hay que hacer, la lista, las
+  novedades y el final; después, 1,5 s y fundido al mail siguiente. Cada mail dura entre 12 y 16 s.
+- Botón visible para pausar o reproducir; la animación no se frena con el puntero encima, sí con la pestaña oculta y fuera de la vista.
+  Con `prefers-reduced-motion` no arranca sola. Los dispositivos no se pueden scrollear a mano y el mail entra y sale con un
+  desvanecido de 24 px.
+- La banda inclinada del hero usa el mismo degradé suave de la tarjeta de entrevista del mail (135°, #3358F0 → #1E40D8 → #1530C8).
 
 ## [2.1.0] - 2026-11-26
 

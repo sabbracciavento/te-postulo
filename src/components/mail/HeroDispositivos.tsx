@@ -8,37 +8,52 @@ import { HeroDuoMovil } from "./HeroDuoMovil";
 import { CapaCelular, CapaVentana, fondoCelular } from "./HeroPantallas";
 
 /*
- * La "película" de cada mail, en ms: entra la notificación al celular (≈1,5 s con la entrada), se abre el mail y los dos
- * dispositivos lo recorren entero, de arriba hasta el pie, a velocidad constante, con micro-pausas en los bloques clave; pausa en
- * el pie y fundido cruzado al mail siguiente. La velocidad se calcula por mail para que cada uno dure DURACION en total.
+ * La "película" de cada mail, en ms: entra la notificación al celular, se abre el mail y los dos dispositivos lo recorren con
+ * SWIPES, como un dedo (o el trackpad) con la inercia de iOS: un arrastre breve que acelera y después la inercia que frena sola
+ * (decaimiento exponencial, forma cerrada, independiente de los cuadros por segundo), aterrizando exacto en el bloque siguiente.
+ * Ahí queda quieto para leerse; al final, pausa y fundido cruzado al mail siguiente.
  */
-const T = { notif: 450, queda: 1050, abrir: 450, espera: 300, micro: 800, final: 1500, cruce: 400, rampa: 400 };
-const DURACION = 30000;
-const CLAVE = ["entrevista", "cifra", "pendientes", "postulaciones", "novedades", "busqueda"];
+const T = { notif: 450, queda: 800, abrir: 400, tope: 1000, arrastre: 100, lectura: 1800, final: 1500, cruce: 400 };
+/*
+ * Tasa de frenado por ms. La de iOS "normal" (0,998) tarda 2,5–3,5 s en frenar un tramo de 300–900 px y llevaba cada mail a ~30 s;
+ * con 0,994 el frenado dura 0,9–1,3 s (lo pedido) con la misma forma exponencial.
+ */
+const D = 0.994;
+const K = -Math.log(D);
+const CLAVE = ["entrevista", "cifra", "pendientes", "postulaciones", "novedades"];
 const N = mailScenarios.length;
 
 const salida = (x: number) => 1 - Math.pow(1 - x, 3.2);
 const suave = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 const tramo = (t: number, t0: number, d: number) => Math.min(1, Math.max(0, (t - t0) / d));
-/** Avance con velocidad trapezoidal: acelera en `r` ms, sigue constante y frena en `r` ms (0 → 1 en `d` ms). */
-function trapecio(t: number, d: number, r: number) {
-  r = Math.min(r, d / 2);
-  const v = 1 / (d - r);
-  if (t <= 0) return 0;
-  if (t >= d) return 1;
-  if (t < r) return (v * t * t) / (2 * r);
-  if (t > d - r) return 1 - (v * (d - t) * (d - t)) / (2 * r);
-  return v * (t - r / 2);
+
+/**
+ * Un swipe de `dist` px: arrastre de T.arrastre ms con aceleración constante hasta v0 y después inercia
+ * x(t) = v0·(1 − D^t)/K. v0 se elige para que arrastre + inercia sumen exactamente `dist`; cuando faltan menos de 0,5 px termina
+ * (y se redondea al valor exacto).
+ */
+function swipe(dist: number) {
+  const Ta = T.arrastre;
+  const inercia = dist / (1 + 0.5 * K * Ta); // lo que recorre la inercia
+  const v0 = inercia * K; // px/ms al soltar
+  const frenado = inercia > 0.5 ? Math.log(0.5 / inercia) / Math.log(D) : 0;
+  const pos = (t: number) => {
+    if (dist <= 0 || t <= 0) return 0;
+    if (t < Ta) return 0.5 * (v0 / Ta) * t * t;
+    const ti = t - Ta;
+    return ti >= frenado ? dist : 0.5 * v0 * Ta + (v0 * (1 - Math.pow(D, ti))) / K;
+  };
+  return { pos, dura: Ta + frenado };
 }
 
 type Capa = { viewport: HTMLElement; scroller: HTMLElement; zoom: number; bloques: Map<string, number>; max: number };
+type Swipe = ReturnType<typeof swipe>;
 type Plan = {
   paradas: { w: number; p: number }[];
-  tramos: { t0: number; d: number; de: number }[];
+  tramos: { t0: number; de: number; w: Swipe; p: Swipe }[];
   total: number;
   tAbrir: number;
   tPrincipal: number; // instante en que el mail llega a su bloque principal (estado fijo: pausa y movimiento reducido)
-  velocidad: number; // px reales por segundo de la ventana, para el registro
 };
 
 function medir(capa: HTMLElement): Capa | null {
@@ -56,33 +71,29 @@ function medir(capa: HTMLElement): Capa | null {
   return { viewport, scroller, zoom, bloques, max: Math.max(0, r.height - v.height) };
 }
 
-/** Paradas: arriba → bloques clave → pie (el final de los dos). El celular va un bloque adelante. */
+/** Paradas: tope → bloques clave → final (tu búsqueda y el pie). El celular va un bloque adelante. */
 function planear(w: Capa, p: Capa): Plan {
-  const nombres = [...w.bloques.keys()].filter((n) => CLAVE.includes(n));
+  let nombres = [...w.bloques.keys()].filter((n) => CLAVE.includes(n));
+  if (nombres.includes("entrevista")) nombres = nombres.filter((n) => n !== "cifra"); // la tarjeta es el bloque principal
   const a = (c: Capa, n: string | undefined) => (n === undefined ? c.max : Math.min(c.max, Math.max(0, (c.bloques.get(n) ?? c.max) - 30)));
   const crudas = [{ w: 0, p: 0 }];
   nombres.forEach((n, k) => crudas.push({ w: a(w, n), p: a(p, nombres[k + 1]) }));
   crudas.push({ w: w.max, p: p.max });
-  const paradas = crudas.filter((q, k) => !k || q.w - crudas[k - 1].w > 24 || q.p - crudas[k - 1].p > 24);
-  // tiempo de recorrido: lo que queda de DURACION; cada tramo dura según su parte del recorrido del dispositivo que más se mueve
+  // en px enteros: así el aterrizaje es exacto y el texto queda nítido
+  const paradas = crudas.map((q) => ({ w: Math.round(q.w), p: Math.round(q.p) })).filter((q, k, l) => !k || q.w - l[k - 1].w > 24 || q.p - l[k - 1].p > 24);
   const tAbrir = T.notif + T.queda;
-  const fijo = tAbrir + T.abrir + T.espera + T.micro * Math.max(0, paradas.length - 2) + T.final;
-  const recorrido = Math.max(6000, DURACION - fijo);
-  const DW = Math.max(1, w.max);
-  const DP = Math.max(1, p.max);
-  const pesos = paradas.slice(1).map((q, k) => Math.max((q.w - paradas[k].w) / DW, (q.p - paradas[k].p) / DP, 0.02));
-  const suma = pesos.reduce((x, y) => x + y, 0);
-  let t = tAbrir + T.abrir + T.espera;
+  let t = tAbrir + T.abrir + T.tope;
   let tPrincipal = t;
-  const tramos = pesos.map((peso, k) => {
-    const d = (recorrido * peso) / suma;
-    const r = { t0: t, d, de: k };
-    t += d;
-    if (k === 0) tPrincipal = t + 1; // recién llegado a la primera parada (cifra o entrevista)
-    t += k === pesos.length - 1 ? T.final : T.micro;
+  const tramos = paradas.slice(1).map((q, k) => {
+    const sw = swipe(q.w - paradas[k].w);
+    const sp = swipe(q.p - paradas[k].p);
+    const r = { t0: t, de: k, w: sw, p: sp };
+    t += Math.max(sw.dura, sp.dura);
+    if (k === 0) tPrincipal = t + 1;
+    t += k === paradas.length - 2 ? T.final : T.lectura;
     return r;
   });
-  return { paradas, tramos, total: t, tAbrir, tPrincipal, velocidad: Math.round((w.max / recorrido) * 1000) };
+  return { paradas, tramos, total: t, tAbrir, tPrincipal };
 }
 
 /** Lleva el desplazamiento a píxeles enteros del dispositivo (texto nítido) y a las unidades del scroller (que puede tener zoom). */
@@ -137,7 +148,7 @@ function Selector({ activo, elegir, pausado, alternar }: { activo: number; elegi
 }
 
 /**
- * Dispositivos del hero con los tres tipos de mail en secuencia, como una película corta de cada uno. Solo transform y opacity,
+ * Dispositivos del hero con los tres tipos de mail en secuencia, recorridos con swipes de inercia. Solo transform y opacity,
  * con requestAnimationFrame. Se detiene solo con el botón de pausa, con la pestaña oculta o con el hero fuera de la vista (el
  * puntero encima NO la frena). Con movimiento reducido no arranca sola: queda el mail abierto en su bloque principal y la
  * reproduce el botón. Devuelve las dos composiciones (celular < 768 y tablet/escritorio) como hijos directos de la grilla del hero.
@@ -175,7 +186,7 @@ export function HeroDispositivos() {
         const p = medir(capa(c, "celular", i));
         e = { pl: w && p ? planear(w, p) : null, w, p };
         st.planes.set(k, e);
-        if (e.pl) c.dataset[`duracion${i}`] = `${Math.round(e.pl.total)}ms · ${e.pl.velocidad}px/s`;
+        if (e.pl) c.dataset[`duracion${i}`] = `${Math.round(e.pl.total)}ms · ${e.pl.tramos.length} swipes`;
       }
       return e;
     }
@@ -196,9 +207,7 @@ export function HeroDispositivos() {
       for (const r of pl.tramos) {
         if (t < r.t0) break;
         const de = pl.paradas[r.de];
-        const a = pl.paradas[r.de + 1];
-        const x = trapecio(t - r.t0, r.d, T.rampa);
-        y = { w: de.w + (a.w - de.w) * x, p: de.p + (a.p - de.p) * x };
+        y = { w: de.w + r.w.pos(t - r.t0), p: de.p + r.p.pos(t - r.t0) };
       }
       mover(w, y.w);
       mover(p, y.p);
@@ -341,7 +350,7 @@ export function HeroDispositivos() {
       <div ref={(el) => void (comps.current[1] = el)} className="relative mt-12 hidden md:block apaisado:hidden! lg:col-span-7 lg:mt-0">
         {/* decorativo y sin interacción: el mail baja solo, no se scrollea a mano */}
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <span className="tp-slant pointer-events-none absolute -bottom-12 -top-12 left-[44%] w-[30%] bg-brand" />
+          <span className="tp-slant pointer-events-none absolute -bottom-12 -top-12 left-[44%] w-[30%] bg-[linear-gradient(135deg,#3358F0_0%,#1E40D8_55%,#1530C8_100%)]" />
           {/* margen a la derecha: el celular (~216 px) tapa solo el borde derecho de la ventana, ~15–19 % de su ancho */}
           <div className="relative pb-16 pr-36 xl:pr-32">
             <GmailDesktop

@@ -14,8 +14,8 @@ export function HeroDuoMovil({ ventana, celular, selector }: { ventana: ReactNod
       <div className="relative aspect-[342/360] w-full font-sans text-ink">
         {/* decorativo y sin interacción: el mail baja solo, no se scrollea a mano */}
         <div aria-hidden="true" className="pointer-events-none select-none">
-          {/* banda inclinada del TP, detrás */}
-          <span className="tp-slant pointer-events-none absolute inset-y-[2cqw] left-[50cqw] w-[24cqw] bg-brand" />
+          {/* banda inclinada del TP, detrás: el mismo degradé suave de la tarjeta de entrevista del mail (135°) */}
+          <span className="tp-slant pointer-events-none absolute inset-y-[2cqw] left-[50cqw] w-[24cqw] bg-[linear-gradient(135deg,#3358F0_0%,#1E40D8_55%,#1530C8_100%)]" />
 
           {/* compu: ventana de Gmail con cromo mínimo */}
           <div className="absolute left-0 top-0 h-[84cqw] w-[80cqw] overflow-hidden rounded-[3.5cqw] border border-line bg-[#f6f8fc] shadow-[0_1cqw_4cqw_rgba(16,24,40,0.08)]">
