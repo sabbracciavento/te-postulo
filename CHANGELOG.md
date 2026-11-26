@@ -10,7 +10,7 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 - Hero animado: el mail se recorre con swipes, como un dedo en el celular (o el trackpad en la compu), en lugar del desplazamiento
   continuo. Cada swipe es un arrastre breve y la inercia que frena sola (curva exponencial, como en iOS) hasta caer exacto en el
   bloque siguiente; ahí queda quieto 1,8 s para leerse. Recorre el tope, la cifra o la entrevista, lo que hay que hacer, la lista, las
-  novedades y el final; después, 1,5 s y fundido al mail siguiente. Cada mail dura entre 12 y 16 s.
+  novedades y el final; después, 1,5 s y fundido al mail siguiente. Cada mail dura 14,4 s (4 swipes) o 17,4 s (5 swipes).
 - Botón visible para pausar o reproducir; la animación no se frena con el puntero encima, sí con la pestaña oculta y fuera de la vista.
   Con `prefers-reduced-motion` no arranca sola. Los dispositivos no se pueden scrollear a mano y el mail entra y sale con un
   desvanecido de 24 px.
