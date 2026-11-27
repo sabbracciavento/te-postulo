@@ -7,6 +7,9 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 ## [Sin publicar]
 
 ### Cambiado
+- README renovado para presentar el servicio: banner con la promesa y los dispositivos, qué hacemos por vos, cómo funciona,
+  el mail diario en la compu y el celular, resultados del caso real, planes y contacto por WhatsApp e Instagram. Los detalles del
+  código pasan a una sección plegable. Imágenes nuevas en `docs/img/`, sacadas de capturas del sitio.
 - Mail de muestra: en "Tu búsqueda" el resultado va primero. Las entrevistas, que antes eran un número chico dentro del texto de
   "en proceso", encabezan la banda en una pieza propia con el número grande y "Una empresa te convocó."; debajo, postulaciones,
   CV vistos y en proceso. En el celular esas tres cifras van en filas, no en columnas apretadas.
