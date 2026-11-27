@@ -24,8 +24,6 @@ const wordmark = Plus_Jakarta_Sans({
   style: "italic",
   variable: "--font-wordmark",
   display: "swap",
-  // sin precarga: no compite con las fuentes del título (LCP); el logo la toma apenas llega
-  preload: false,
 });
 
 /* Solo para el marco de Gmail de la muestra del mail; no se precarga. */
