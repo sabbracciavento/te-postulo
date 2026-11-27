@@ -36,16 +36,28 @@ export const steps = {
   },
 };
 
-/* Cifras: solo las del registro del kit (EVIDENCIA M01, M04, M10), siempre con su pie. */
+/*
+ * Caso real (27-11-2026, aprobado por el dueño): Karen S. con su foto y SUS palabras, tal como las publicó en sus historias de
+ * Instagram (solo se corrigió "cv" → "CV" y las tildes). Nunca se le inventa un texto a una persona real: un testimonio nuevo
+ * va solo con su OK escrito. Las cifras son las del registro del kit, con su pie.
+ */
 export const evidence = {
-  perfil: "Perfil administrativo · CABA",
-  title: "Lo que hicimos en un caso",
+  kicker: "Un caso real",
+  title: "3 entrevistas en cinco semanas.",
+  persona: {
+    nombre: "Karen S.",
+    perfil: "Administrativa · Belgrano, CABA",
+    foto: "/casos/caso-1.jpg",
+    fuente: "Lo contó en sus historias de Instagram",
+  },
+  quote: "Te llegan mails con el resumen de postulaciones en el día, si alguna empresa se interesó en tu CV y si te escriben por alguna entrevista.",
+  quote2: "En el perfil de @te.postulo podés encontrar toda la info, y cualquier duda, escribile para que te expliquen bien bien todo.",
   metrics: [
-    { value: "4.142", label: "avisos revisados" },
-    { value: "185", label: "postulaciones verificadas" },
     { value: "3", label: "entrevistas" },
+    { value: "185", label: "postulaciones verificadas" },
+    { value: "4.142", label: "avisos revisados" },
   ],
-  note: "Del 21/10 al 25/11/2026 · 12 días con postulaciones. Resultados individuales, no garantizados.",
+  note: "Del 21/10 al 25/11/2026 · 12 días con postulaciones. Resultados individuales, no garantizados.",
 };
 
 export const mailSection = {
