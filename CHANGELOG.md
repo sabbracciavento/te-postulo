@@ -7,6 +7,7 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 ## [Sin publicar]
 
 ### Cambiado
+- Mail de muestra: el nombre del pie usa el wordmark (Plus Jakarta Sans itálica, "Postulo" en azul acción), igual que el mail real.
 - README renovado para presentar el servicio: banner con la promesa y los dispositivos, qué hacemos por vos, cómo funciona,
   el mail diario en la compu y el celular, resultados del caso real, planes y contacto por WhatsApp e Instagram. Los detalles del
   código pasan a una sección plegable. Imágenes nuevas en `docs/img/`, sacadas de capturas del sitio.

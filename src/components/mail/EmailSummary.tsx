@@ -285,8 +285,9 @@ export function EmailSummary({ scenario: s, compact = false, hero = false }: { s
             {mailFirma}
           </p>
           <p className="m-0 mt-2 text-[14px] leading-[1.6] text-slate">{mailPie}</p>
-          <p className="m-0 mt-4 text-[14px] font-extrabold leading-[1.4] text-brand" style={{ fontFamily: FONT_LOGO }}>
-            TePostulo
+          {/* como el pie del mail real: el nombre en Plus Jakarta itálica, "Te" en tinta y "Postulo" en azul acción (sin degradé: Gmail no lo muestra) */}
+          <p className="m-0 mt-4 text-[15px] italic leading-[1.4] tracking-[-0.04em] text-ink" style={{ fontFamily: "var(--font-wordmark), 'Plus Jakarta Sans', Arial, sans-serif", fontWeight: 800 }}>
+            Te<span className="text-action">Postulo</span>
           </p>
         </div>
       )}
