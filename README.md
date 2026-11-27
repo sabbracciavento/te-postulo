@@ -1,9 +1,9 @@
 <a href="https://tepostulo.com.ar"><img src="docs/img/banner.png" alt="TePostulo: nos postulamos por vos. Buscamos avisos que encajan con tu perfil, adaptamos tu CV y te contamos cada avance por mail." width="100%"></a>
 
 <p align="center">
-  <a href="https://tepostulo.com.ar"><img alt="tepostulo.com.ar" src="https://img.shields.io/badge/tepostulo.com.ar-2457F5?style=for-the-badge&logoColor=white"></a>
-  <a href="https://wa.me/5491134861995?text=Hola%2C%20quiero%20saber%20c%C3%B3mo%20funciona%20TePostulo%20para%20mi%20perfil."><img alt="WhatsApp" src="https://img.shields.io/badge/WhatsApp-escribinos-0025CE?style=for-the-badge&logo=whatsapp&logoColor=white"></a>
-  <a href="https://www.instagram.com/te.postulo/"><img alt="Instagram @te.postulo" src="https://img.shields.io/badge/Instagram-@te.postulo-101828?style=for-the-badge&logo=instagram&logoColor=white"></a>
+  <a href="https://tepostulo.com.ar"><img alt="tepostulo.com.ar" src="docs/img/badges/sitio.svg"></a>
+  <a href="https://wa.me/5491134861995?text=Hola%2C%20quiero%20saber%20c%C3%B3mo%20funciona%20TePostulo%20para%20mi%20perfil."><img alt="WhatsApp" src="docs/img/badges/whatsapp.svg"></a>
+  <a href="https://www.instagram.com/te.postulo/"><img alt="Instagram @te.postulo" src="docs/img/badges/instagram.svg"></a>
 </p>
 
 <h3 align="center">Buscar trabajo te lleva horas todos los días. Dejanos esa parte a nosotros.</h3>
