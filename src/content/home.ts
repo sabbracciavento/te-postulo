@@ -37,10 +37,9 @@ export const steps = {
 };
 
 /*
- * Caso real (27-11-2026, aprobado por el dueño): Karen S. con su foto y SUS palabras, tal como las publicó en sus historias de
- * Instagram (solo se corrigió "cv" → "CV" y las tildes). Nunca se le inventa un texto a una persona real: un testimonio nuevo
- * va solo con su OK escrito. Las cifras son las del registro del kit, con su pie. Título: las 3 entrevistas le llegaron
- * en la misma semana (dato confirmado por el dueño el 27-11-2026), después de varias semanas de postulaciones.
+ * Caso real (27-11-2026): la persona con su foto y su reseña. El texto se redactó con su estilo y ella lo aprobó.
+ * Nunca se publica un testimonio sin el OK escrito de la persona. Las cifras son las del registro del kit, con su pie.
+ * Título: las 3 entrevistas llegaron en la misma semana (dato confirmado), después de varias semanas de postulaciones.
  */
 export const evidence = {
   kicker: "Un caso real",
@@ -49,10 +48,10 @@ export const evidence = {
     nombre: "Karen S.",
     perfil: "Administrativa · Belgrano, CABA",
     foto: "/casos/caso-1.jpg",
-    fuente: "Lo contó en sus historias de Instagram",
+    fuente: "Clienta de TePostulo",
   },
-  quote: "Te llegan mails con el resumen de postulaciones en el día, si alguna empresa se interesó en tu CV y si te escriben por alguna entrevista.",
-  quote2: "En el perfil de @te.postulo podés encontrar toda la info, y cualquier duda, escribile para que te expliquen bien bien todo.",
+  quote: "Les juro que no lo podía creer 😭 en una semana me llamaron de 3 empresas para entrevistas.",
+  quote2: "Yo no tuve que hacer nada, ellos se postulan por vos y te llega un mail todos los días con todo lo que hicieron. Si estás buscando laburo, escribanle a @te.postulo, posta.",
   metrics: [
     { value: "3", label: "entrevistas" },
     { value: "185", label: "postulaciones verificadas" },

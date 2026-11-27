@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { evidence } from "@/content/home";
-import { InstagramIcon } from "@/components/ui/InstagramIcon";
+import { Icon } from "@/components/ui/Icon";
 
 /**
  * Un caso real: el testimonio de la persona (foto circular, sus palabras tal como las publicó) y las cifras verificadas, con la
@@ -42,7 +42,7 @@ export function Evidence() {
                     <span className="block font-display text-[19px] font-extrabold leading-tight">{persona.nombre}</span>
                     <span className="block text-[15px] text-white/85">{persona.perfil}</span>
                     <span className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-white/[0.12] px-2.5 py-1 text-[13px] font-medium text-white/90">
-                      <InstagramIcon className="h-3.5 w-3.5" />
+                      <Icon name="check" className="h-3.5 w-3.5" />
                       {persona.fuente}
                     </span>
                   </span>

@@ -7,6 +7,7 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 ## [Sin publicar]
 
 ### Cambiado
+- "Un caso real": reseña nueva de Karen S., aprobada por ella ("en una semana me llamaron de 3 empresas para entrevistas"); la etiqueta pasa a "Clienta de TePostulo".
 - "Un caso real": el título pasa a "3 entrevistas en una semana." (las tres llegaron en la misma semana).
 - "Un caso real": la sección de cifras pasa a ser el caso de Karen S. con su foto circular y su testimonio, con sus palabras tal como las publicó en Instagram. El título es "3 entrevistas en cinco semanas."; la entrevista va primero y más grande, y las cifras verificadas siguen con su pie.
 - Mail de muestra: el nombre del pie usa el wordmark (Plus Jakarta Sans itálica, "Postulo" en azul acción), igual que el mail real.
