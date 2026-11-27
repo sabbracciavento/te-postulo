@@ -7,6 +7,10 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 ## [Sin publicar]
 
 ### Cambiado
+- Mail de muestra: en "Tu búsqueda" el resultado va primero. Las entrevistas, que antes eran un número chico dentro del texto de
+  "en proceso", encabezan la banda en una pieza propia con el número grande y "Una empresa te convocó."; debajo, postulaciones,
+  CV vistos y en proceso. En el celular esas tres cifras van en filas, no en columnas apretadas.
+- Tarjeta de entrevista en el celular: la fecha vuelve a tener el día grande, con el mes y la hora al lado, como en la compu.
 - Nuevo wordmark en toda la landing (encabezado, pie, página 404, privacidad, cabecera del mail de muestra e imagen para redes):
   "TePostulo" en Plus Jakarta Sans ExtraBold itálica, "Te" en tinta y "Postulo" con un degradé tornasolado (en fondos azules, blanco
   y celeste). La fuente se carga solo para el wordmark; los tokens viven en `tokens.css` (`--tp-wordmark-*`). El enlace del logo se

@@ -105,11 +105,16 @@ export function EmailSummary({ scenario: s, compact = false, hero = false }: { s
                   {s.entrevista.empresa}
                 </p>
                 <p className="m-0 mt-2.5 text-[16px] leading-[1.5]">{s.entrevista.puesto}</p>
-                {/* en el celular la fecha va en una línea debajo del puesto (como el mail real en ≤ 680 px) */}
-                <p className="m-0 mt-3.5 text-[22px] leading-[1.2] @min-[680px]:hidden" style={NUM}>
-                  {s.entrevista.dia} {s.entrevista.mes}
-                  {s.entrevista.hora ? ` · ${s.entrevista.hora}` : ""}
-                </p>
+                {/* en el celular la fecha va debajo del puesto, como en el mail real en ≤ 680 px: el día grande y, tras un filete, mes y hora */}
+                <div className="mt-[22px] flex items-center @min-[680px]:hidden">
+                  <span className="pr-3.5 text-[52px] leading-none tracking-[-2px]" style={NUM}>
+                    {s.entrevista.dia}
+                  </span>
+                  <span className="border-l border-[#6A86F4] pl-3.5">
+                    <span className="block text-[12px] font-bold uppercase leading-[1.4] tracking-[1.6px]">{s.entrevista.mes}</span>
+                    {s.entrevista.hora && <span className="mt-0.5 block text-[16px] font-bold leading-[1.3]">{s.entrevista.hora}</span>}
+                  </span>
+                </div>
               </div>
               <div className="hidden shrink-0 text-right @min-[680px]:block">
                 <div className="text-[12px] font-bold uppercase leading-[1.2] tracking-[1.6px]">{s.entrevista.mes}</div>
@@ -230,18 +235,39 @@ export function EmailSummary({ scenario: s, compact = false, hero = false }: { s
               </Fila>
             )}
 
-            {/* la búsqueda completa: banda hielo con tres cifras y filetes verticales */}
+            {/* la búsqueda completa, con el resultado primero (como el mail real): si hay entrevistas, encabezan la banda en una pieza
+                blanca propia; debajo, el camino que llevó ahí. En el celular el camino va en filas (tres columnas no entran a 320 px). */}
             <Fila filete={false} className="bg-ice" bloque="busqueda">
               <Rotulo color="text-slate">Tu búsqueda desde el {mailDesde}</Rotulo>
-              <dl className={`m-0 grid ${hero ? "grid-cols-1 gap-3" : "grid-cols-3"}`}>
+              {b.entrevistas > 0 && (
+                <div className="mb-[26px] flex items-center gap-4 rounded-[14px] border border-line bg-white px-[22px] py-5">
+                  <span className="text-[52px] leading-none tracking-[-2px] text-brand" style={NUM}>
+                    {b.entrevistas}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-[20px] font-extrabold leading-[1.2] tracking-[-0.4px]" style={{ fontFamily: FONT_LOGO }}>
+                      {palabra(b.entrevistas, "entrevista", "entrevistas")}
+                    </span>
+                    <span className="mt-1 block text-[15px] leading-[1.45] text-slate">
+                      {b.entrevistas === 1 ? "Una empresa te convocó." : `${b.entrevistas} empresas te convocaron.`}
+                    </span>
+                  </span>
+                </div>
+              )}
+              <dl className={`m-0 grid grid-cols-1 gap-2.5 ${hero ? "" : "@min-[680px]:grid-cols-3 @min-[680px]:gap-0"}`}>
                 {[
                   [b.postulaciones, palabra(b.postulaciones, "postulación", "postulaciones")],
                   [b.vistos, palabra(b.vistos, "CV visto", "CV vistos")],
-                  [b.enProceso, "en proceso" + (b.entrevistas ? ` · ${b.entrevistas} ${palabra(b.entrevistas, "entrevista", "entrevistas")}` : "")],
+                  [b.enProceso, "en proceso"],
                 ].map(([v, label], i) => (
-                  <div key={String(label)} className={hero ? "flex flex-row-reverse items-baseline justify-end gap-2.5" : `flex flex-col-reverse justify-end ${i ? "border-l border-line pl-[18px]" : ""}`}>
-                    <dt className="mt-2 text-[13px] [.mail-hero_&]:mt-0 leading-[1.4] text-slate @min-[680px]:text-[14px]">{label}</dt>
-                    <dd className="m-0 text-[30px] leading-none tracking-[-1px] text-brand @min-[680px]:text-[34px]" style={NUM}>
+                  <div
+                    key={String(label)}
+                    className={`flex flex-row-reverse items-baseline justify-end ${
+                      hero ? "" : `@min-[680px]:flex-col-reverse ${i ? "@min-[680px]:border-l @min-[680px]:border-line @min-[680px]:pl-[18px]" : ""}`
+                    }`}
+                  >
+                    <dt className={`text-[15px] leading-[1.4] text-slate ${hero ? "" : "@min-[680px]:mt-2 @min-[680px]:text-[14px]"}`}>{label}</dt>
+                    <dd className={`m-0 shrink-0 text-[28px] leading-none tracking-[-1px] text-brand ${hero ? "w-14" : "w-20 @min-[680px]:w-auto @min-[680px]:text-[34px]"}`} style={NUM}>
                       {v}
                     </dd>
                   </div>
