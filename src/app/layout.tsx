@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Sans, Manrope, Roboto } from "next/font/google";
+import { Instrument_Sans, Manrope, Plus_Jakarta_Sans, Roboto } from "next/font/google";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -14,6 +14,15 @@ const instrument = Instrument_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   variable: "--font-instrument",
+  display: "swap",
+});
+
+/* Solo para el wordmark "TePostulo" (logo y cabecera del mail de muestra); no reemplaza a Manrope ni a Instrument Sans. */
+const wordmark = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: "800",
+  style: "italic",
+  variable: "--font-wordmark",
   display: "swap",
 });
 
@@ -50,7 +59,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-AR" className={`${manrope.variable} ${instrument.variable} ${roboto.variable} h-full antialiased`}>
+    <html lang="es-AR" className={`${manrope.variable} ${instrument.variable} ${wordmark.variable} ${roboto.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#contenido"

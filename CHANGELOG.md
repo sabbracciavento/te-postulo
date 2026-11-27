@@ -7,6 +7,10 @@ Todos los cambios relevantes del sitio se documentan acá. El formato sigue
 ## [Sin publicar]
 
 ### Cambiado
+- Nuevo wordmark en toda la landing (encabezado, pie, página 404, privacidad, cabecera del mail de muestra e imagen para redes):
+  "TePostulo" en Plus Jakarta Sans ExtraBold itálica, "Te" en tinta y "Postulo" con un degradé tornasolado (en fondos azules, blanco
+  y celeste). La fuente se carga solo para el wordmark; los tokens viven en `tokens.css` (`--tp-wordmark-*`). El enlace del logo se
+  anuncia como "TePostulo". El README suma el logo arriba del título.
 - Hero animado: el mail se recorre con swipes, como un dedo en el celular (o el trackpad en la compu), en lugar del desplazamiento
   continuo. Cada swipe es un arrastre breve y la inercia que frena sola (curva exponencial, como en iOS) hasta caer exacto en el
   bloque siguiente; ahí queda quieto 1,8 s para leerse. Recorre el tope, la cifra o la entrevista, lo que hay que hacer, la lista, las

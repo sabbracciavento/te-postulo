@@ -31,4 +31,13 @@
   --tp-space-48: 48px;
   --tp-space-64: 64px;
   --tp-space-96: 96px;
+
+  /* Wordmark "TePostulo": Plus Jakarta Sans ExtraBold itálica; "Te" plano y "Postulo" con degradé tornasolado */
+  --tp-wordmark-tracking: -0.04em;
+  --tp-wordmark-te: #101828;
+  --tp-wordmark-postulo: linear-gradient(100deg, #2F7BFF 0%, #2457F5 40%, #3B2FD9 75%, #14289E 100%);
+  --tp-wordmark-postulo-fallback: #2457F5;
+  --tp-wordmark-te-oscuro: #FFFFFF;
+  --tp-wordmark-postulo-oscuro: linear-gradient(100deg, #FFFFFF 0%, #CFE0FF 45%, #D9D2FF 100%);
+  --tp-wordmark-postulo-oscuro-fallback: #CFE0FF;
 }

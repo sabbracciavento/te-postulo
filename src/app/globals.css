@@ -180,3 +180,30 @@
 .mail-hero .text-\[13px\] { font-size: max(13px, var(--mail-min, 0px)); }
 .mail-hero .text-\[14px\] { font-size: max(14px, var(--mail-min, 0px)); }
 .mail-hero .text-\[15px\] { font-size: max(15px, var(--mail-min, 0px)); }
+
+/* Wordmark "TePostulo" (identidad del dueño, 26/11/2026). El padding derecho evita que la itálica se corte. */
+.wordmark {
+  font-family: var(--font-wordmark), "Plus Jakarta Sans", var(--tp-font-display);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: var(--tp-wordmark-tracking);
+  padding-right: 0.08em;
+  color: var(--tp-wordmark-te);
+  white-space: nowrap;
+}
+.wordmark > span {
+  color: var(--tp-wordmark-postulo-fallback);
+  padding-right: 0.08em;
+  margin-right: -0.08em;
+}
+.wordmark-oscuro { color: var(--tp-wordmark-te-oscuro); }
+.wordmark-oscuro > span { color: var(--tp-wordmark-postulo-oscuro-fallback); }
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .wordmark > span {
+    background-image: var(--tp-wordmark-postulo);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .wordmark-oscuro > span { background-image: var(--tp-wordmark-postulo-oscuro); }
+}

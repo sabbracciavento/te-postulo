@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/img/logo-tepostulo.png" alt="TePostulo" width="360"></p>
+
 <h1 align="center">TePostulo</h1>
 
 <p align="center"><strong>Landing de un servicio que se postula a empleos por la persona y le cuenta cada avance por mail.</strong></p>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
+import { Wordmark } from "./Wordmark";
 
 type Size = "sm" | "md" | "lg";
 
@@ -12,9 +13,8 @@ const SIZES: Record<Size, { mark: number; text: string }> = {
 };
 
 /**
- * Lockup horizontal del kit: monograma TP a la izquierda (PNG original, sin redibujar) y wordmark "TePostulo"
- * a la derecha, separados 0,25 × la altura del símbolo. El wordmark en Manrope es el logo tipográfico provisional
- * del kit; el SVG definitivo está pendiente (vectorizar el monograma).
+ * Lockup horizontal: monograma TP a la izquierda (PNG original, sin redibujar) y el wordmark "TePostulo" (Plus Jakarta Sans
+ * ExtraBold itálica, "Postulo" con degradé) a la derecha, separados 0,25 × la altura del símbolo.
  */
 export function Logo({ size = "md", href = "/", asLink = true, onDark = false, className = "" }:
   { size?: Size; href?: string; asLink?: boolean; onDark?: boolean; className?: string }) {
@@ -27,11 +27,10 @@ export function Logo({ size = "md", href = "/", asLink = true, onDark = false, c
         width={onDark ? Math.round(s.mark * 1.3) : s.mark}
         height={s.mark}
         className={onDark ? "h-auto" : "rounded-full"}
+        style={{ marginRight: s.mark * 0.25 }}
         priority={size === "md"}
       />
-      <span className={`font-display font-extrabold tracking-[-0.03em] ${s.text} ${onDark ? "text-white" : "text-ink"}`} style={{ marginLeft: s.mark * 0.25 }}>
-        {site.name}
-      </span>
+      <Wordmark oscuro={onDark} className={`leading-none ${s.text}`} />
     </>
   );
   const cls = `inline-flex min-h-11 items-center ${className}`;
@@ -43,7 +42,7 @@ export function Logo({ size = "md", href = "/", asLink = true, onDark = false, c
     );
   }
   return (
-    <Link href={href} className={cls} aria-label={`${site.name}, inicio`}>
+    <Link href={href} className={cls} aria-label={site.name}>
       {inner}
     </Link>
   );

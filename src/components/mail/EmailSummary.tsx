@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Wordmark } from "@/components/ui/Wordmark";
 import {
   estadoLabel,
   mailAvisosInstruccion,
@@ -74,8 +75,9 @@ export function EmailSummary({ scenario: s, compact = false, hero = false }: { s
         {/* cabecera blanca: monograma + nombre + fecha corta en versalitas */}
         <div data-bloque="cabecera" className="flex items-center gap-2.5 px-6 pb-7 pt-9 @min-[680px]:px-12">
           <Image src="/brand/mail/logo-tp-192.png" alt="" width={36} height={36} className="h-9 w-9" />
-          <span className="flex-1 text-[20px] font-extrabold leading-9 tracking-[-0.5px]" style={{ fontFamily: FONT_LOGO }}>
-            TePostulo
+          {/* el wordmark de la marca, como en la cabecera del mail */}
+          <span className="flex-1 text-[21px] leading-9">
+            <Wordmark />
           </span>
           {/* en el celular del hero (pantalla muy angosta) la fecha corta no entra: ya está en el saludo */}
           <span className={`whitespace-nowrap text-[12px] font-bold uppercase tracking-[1.4px] text-slate ${hero ? "@max-[240px]:hidden" : ""}`}>{s.fechaCorta}</span>
