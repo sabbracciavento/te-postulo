@@ -39,11 +39,12 @@ export const steps = {
 /*
  * Caso real (27-11-2026, aprobado por el dueño): Karen S. con su foto y SUS palabras, tal como las publicó en sus historias de
  * Instagram (solo se corrigió "cv" → "CV" y las tildes). Nunca se le inventa un texto a una persona real: un testimonio nuevo
- * va solo con su OK escrito. Las cifras son las del registro del kit, con su pie.
+ * va solo con su OK escrito. Las cifras son las del registro del kit, con su pie. Título: las 3 entrevistas le llegaron
+ * en la misma semana (dato confirmado por el dueño el 27-11-2026), después de varias semanas de postulaciones.
  */
 export const evidence = {
   kicker: "Un caso real",
-  title: "3 entrevistas en cinco semanas.",
+  title: "3 entrevistas en una semana.",
   persona: {
     nombre: "Karen S.",
     perfil: "Administrativa · Belgrano, CABA",
